@@ -8,7 +8,7 @@ public class User {
     private String email;
     private int userPhoneNumber;
     private String hashedPassword;
-    
+
 
     public User(long id, String name, String lastName, int age, String email, int userPhoneNumber, String hashedPassword) {
         this.id = id;

@@ -3,5 +3,5 @@
 out
 .gitignore
 README.md
-pom.xml
+*.xml
 target/
