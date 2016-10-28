@@ -4,13 +4,17 @@ public class Hotel {
     private long hotelId;
     private String hotelName;
     private String cityName;
+    private String address
+    private int rating;
     //private int price;
 
 
-    public Hotel(long hotelId, String hotelName, String cityName) {
+    public Hotel(long hotelId, String hotelName, String cityName, String address, int rating) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.cityName = cityName;
+        this.address = address;
+        this.rating = rating;
     }
 
     public String getCityName() {
@@ -23,6 +27,14 @@ public class Hotel {
 
     public long getHotelId() {
         return hotelId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getRating() {
+        return rating;
     }
 
     @java.lang.Override
