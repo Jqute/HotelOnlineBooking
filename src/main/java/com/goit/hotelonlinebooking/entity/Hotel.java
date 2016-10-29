@@ -47,6 +47,10 @@ public class Hotel {
         return rooms;
     }
 
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
     @java.lang.Override
     public java.lang.String toString() {
         return "Hotel{" +
