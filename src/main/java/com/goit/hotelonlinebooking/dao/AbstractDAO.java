@@ -30,7 +30,11 @@ public class AbstractDAO<T> {
 
     public void deleteList(List<T> listObj) {
 
-        listObject.removeAll(listObj);
+        if (listObject.isEmpty()) {
+            System.out.println("Objects list is empty");
+        } else {
+            listObject.removeAll(listObj);
+        }
 
     }
 
@@ -48,8 +52,6 @@ public class AbstractDAO<T> {
         return listObject;
 
     }
-
-
 
 
 }
