@@ -4,16 +4,17 @@ public class Hotel {
     private long hotelId;
     private String hotelName;
     private String cityName;
-    private String address
+    private String address;
+    private String eMail;
     private int rating;
-    //private int price;
 
 
-    public Hotel(long hotelId, String hotelName, String cityName, String address, int rating) {
+    public Hotel(long hotelId, String hotelName, String cityName, String address, String eMail, int rating) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.cityName = cityName;
         this.address = address;
+        this.eMail = eMail;
         this.rating = rating;
     }
 
@@ -37,12 +38,19 @@ public class Hotel {
         return rating;
     }
 
+    public String geteMail() {
+        return eMail;
+    }
+
     @java.lang.Override
     public java.lang.String toString() {
         return "Hotel{" +
-                "cityName='" + cityName + '\'' +
+                "hotelId=" + hotelId +
                 ", hotelName='" + hotelName + '\'' +
-                ", hotelId=" + hotelId +
+                ", cityName='" + cityName + '\'' +
+                ", address='" + address + '\'' +
+                ", eMail='" + eMail + '\'' +
+                ", rating=" + rating +
                 '}';
     }
 
@@ -54,9 +62,10 @@ public class Hotel {
         Hotel hotel = (Hotel) object;
 
         if (getHotelId() != hotel.getHotelId()) return false;
-        if (getCityName() != null ? !getCityName().equals(hotel.getCityName()) : hotel.getCityName() != null)
-            return false;
+        if (getRating() != hotel.getRating()) return false;
         if (getHotelName() != null ? !getHotelName().equals(hotel.getHotelName()) : hotel.getHotelName() != null)
+            return false;
+        if (getCityName() != null ? !getCityName().equals(hotel.getCityName()) : hotel.getCityName() != null)
             return false;
 
         return true;
@@ -64,9 +73,10 @@ public class Hotel {
 
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (getCityName() != null ? getCityName().hashCode() : 0);
-        result = 31 * result + (getHotelName() != null ? getHotelName().hashCode() : 0);
         result = 31 * result + (int) (getHotelId() ^ (getHotelId() >>> 32));
+        result = 31 * result + (getHotelName() != null ? getHotelName().hashCode() : 0);
+        result = 31 * result + (getCityName() != null ? getCityName().hashCode() : 0);
+        result = 31 * result + getRating();
         return result;
     }
 }
