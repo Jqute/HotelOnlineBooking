@@ -7,7 +7,7 @@ public class Room {
     private boolean isInactive;
     private User userReserved;
 
-    
+
     public Room(long roomId, int floor, int capacity, boolean isInactive, User userReserved) {
         this.roomId = roomId;
         this.floor = floor;
