@@ -7,6 +7,7 @@ public class Hotel {
     private String address;
     private String eMail;
     private int rating;
+    private List<Room> rooms;
 
 
     public Hotel(long hotelId, String hotelName, String cityName, String address, String eMail, int rating) {
@@ -40,6 +41,14 @@ public class Hotel {
 
     public String geteMail() {
         return eMail;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @java.lang.Override
