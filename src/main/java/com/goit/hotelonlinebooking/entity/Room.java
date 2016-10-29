@@ -4,15 +4,13 @@ public class Room {
     private long roomId;
     private int floor;
     private int capacity;
-    private boolean isInactive;
     private User userReserved;
 
-    
-    public Room(long roomId, int floor, int capacity, boolean isInactive, User userReserved) {
+
+    public Room(long roomId, int floor, int capacity, User userReserved) {
         this.roomId = roomId;
         this.floor = floor;
         this.capacity = capacity;
-        this.isInactive = isInactive;
         this.userReserved = userReserved;
     }
 
@@ -26,10 +24,6 @@ public class Room {
 
     public int getCapacity() {
         return capacity;
-    }
-
-    public boolean isInactive() {
-        return isInactive;
     }
 
     public User getUserReserved() {
@@ -46,7 +40,6 @@ public class Room {
         if (roomId != room.roomId) return false;
         if (floor != room.floor) return false;
         if (capacity != room.capacity) return false;
-        if (isInactive != room.isInactive) return false;
         return userReserved.equals(room.userReserved);
 
     }
@@ -56,7 +49,6 @@ public class Room {
         int result = (int) (roomId ^ (roomId >>> 32));
         result = 31 * result + floor;
         result = 31 * result + capacity;
-        result = 31 * result + (isInactive ? 1 : 0);
         result = 31 * result + userReserved.hashCode();
         return result;
     }
