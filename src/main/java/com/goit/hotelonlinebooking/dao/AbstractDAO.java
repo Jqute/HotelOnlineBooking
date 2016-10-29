@@ -1,18 +1,55 @@
 package com.goit.hotelonlinebooking.dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public abstract class AbstractDAO<T> {
+public class AbstractDAO<T> {
 
-    abstract void save(T object);
+    private List<T> listObject = new ArrayList<T>();
 
-    abstract void delete(T object);
+    public void save(T object) {
 
-    abstract void deleteList(List<T> object);
+        for (T u : listObject) {
+            if (u.equals(object)) {
+                System.out.println("Object already exist in list");
+            } else listObject.add(object);
+        }
 
-    abstract void saveList(List<T> object);
+    }
 
-    abstract List<T> getList();
+    public void delete(T object) {
+
+        if (listObject.isEmpty()) {
+            System.out.println("Objects list is empty");
+        } else {
+            listObject.remove(object);
+        }
+    }
+
+    public void deleteList(List<T> listObj) {
+
+        listObject.removeAll(listObj);
+
+    }
+
+    public void saveList(List<T> listObj) {
+
+        listObject.addAll(listObj);
+        Set<T> setObj = new HashSet<T>(listObject);
+        listObject.clear();
+        listObject.addAll(setObj);
+
+    }
+
+    public List<T> getList() {
+
+        return listObject;
+
+    }
+
+
 
 
 }
