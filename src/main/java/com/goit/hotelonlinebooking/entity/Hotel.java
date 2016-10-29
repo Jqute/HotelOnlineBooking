@@ -1,5 +1,7 @@
 package com.goit.hotelonlinebooking.entity;
 
+import java.util.List;
+
 public class Hotel {
     private long hotelId;
     private String hotelName;
