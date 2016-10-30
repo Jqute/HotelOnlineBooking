@@ -12,13 +12,14 @@ public class Hotel {
     private List<Room> rooms;
 
 
-    public Hotel(long hotelId, String hotelName, String cityName, String address, String emailHotel, int rating) {
+    public Hotel(long hotelId, String hotelName, String cityName, String address, String emailHotel, int rating, List<Room> rooms) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.cityName = cityName;
         this.address = address;
         this.emailHotel = emailHotel;
         this.rating = rating;
+        this.rooms = rooms;
     }
 
     public String getCityName() {
