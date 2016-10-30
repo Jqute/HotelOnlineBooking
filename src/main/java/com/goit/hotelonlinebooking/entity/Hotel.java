@@ -54,17 +54,6 @@ public class Hotel {
         this.rooms = rooms;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "Hotel[" +
-                "hotelId=" + hotelId +
-                ", hotelName='" + hotelName + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", address='" + address + '\'' +
-                ", emailHotel='" + emailHotel + '\'' +
-                ", rating=" + rating +
-                ']';
-    }
 
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -90,5 +79,17 @@ public class Hotel {
         result = 31 * result + (getCityName() != null ? getCityName().hashCode() : 0);
         result = 31 * result + getRating();
         return result;
+    }
+
+    @Override
+    public java.lang.String toString() {
+        return "Hotel[" +
+                "hotelId=" + hotelId +
+                ", hotelName='" + hotelName + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", address='" + address + '\'' +
+                ", emailHotel='" + emailHotel + '\'' +
+                ", rating=" + rating +
+                ']';
     }
 }
