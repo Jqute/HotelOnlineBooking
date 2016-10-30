@@ -1,7 +1,6 @@
 package com.goit.hotelonlinebooking.dao;
 
 import com.goit.hotelonlinebooking.entity.User;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,8 +8,6 @@ import java.util.stream.Collectors;
  * Created by user on 28.10.2016.
  */
 public class UserDAO extends AbstractDAO<User> {
-
-
 
     public List<User> findUserByName(String name) {
 
@@ -39,6 +36,5 @@ public class UserDAO extends AbstractDAO<User> {
                 .filter(user -> user.getEmail().equals(email))
                 .collect(Collectors.toList());
     }
-
 
 }
