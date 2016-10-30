@@ -6,11 +6,10 @@ public class User {
     private String lastName;
     private int age;
     private String email;
-    private int userPhoneNumber;
+    private String userPhoneNumber;
     private String hashedPassword;
 
-
-    public User(long id, String name, String lastName, int age, String email, int userPhoneNumber, String hashedPassword) {
+    public User(long id, String name, String lastName, int age, String email, String userPhoneNumber, String hashedPassword) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -18,6 +17,7 @@ public class User {
         this.email = email;
         this.userPhoneNumber = userPhoneNumber;
         this.hashedPassword = hashedPassword;
+
     }
     public long getId() {
         return id;
@@ -39,7 +39,7 @@ public class User {
         return email;
     }
 
-    public int getUserPhoneNumber() {
+    public String getUserPhoneNumber() {
         return userPhoneNumber;
     }
 
@@ -56,10 +56,11 @@ public class User {
 
         if (id != user.id) return false;
         if (age != user.age) return false;
-        if (userPhoneNumber != user.userPhoneNumber) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (userPhoneNumber != null ? !userPhoneNumber.equals(user.userPhoneNumber) : user.userPhoneNumber != null)
+            return false;
         return hashedPassword != null ? hashedPassword.equals(user.hashedPassword) : user.hashedPassword == null;
 
     }
@@ -71,7 +72,7 @@ public class User {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + age;
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + userPhoneNumber;
+        result = 31 * result + (userPhoneNumber != null ? userPhoneNumber.hashCode() : 0);
         result = 31 * result + (hashedPassword != null ? hashedPassword.hashCode() : 0);
         return result;
     }
