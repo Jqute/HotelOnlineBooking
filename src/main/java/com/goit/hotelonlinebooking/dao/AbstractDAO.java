@@ -11,10 +11,14 @@ public class AbstractDAO<T> {
 
     public void save(T object) {
 
-        for (T u : listObject) {
-            if (u.equals(object)) {
-                System.out.println("Object already exist in list");
-            } else listObject.add(object);
+        if (listObject.size() == 0) {
+            listObject.add(object);
+        } else {
+            for (T u : listObject) {
+                if (u.equals(object)) {
+                    System.out.println("Object already exist in list");
+                } else listObject.add(object);
+            }
         }
     }
 
