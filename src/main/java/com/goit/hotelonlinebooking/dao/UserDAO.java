@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * Created by user on 28.10.2016.
  */
-public class UserImplDAO extends AbstractDAO<User> {
+public class UserDAO extends AbstractDAO<User> {
 
 
 
