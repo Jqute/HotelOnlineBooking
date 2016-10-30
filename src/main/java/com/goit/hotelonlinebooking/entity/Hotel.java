@@ -7,17 +7,17 @@ public class Hotel {
     private String hotelName;
     private String cityName;
     private String address;
-    private String eMail;
+    private String emailHotel;
     private int rating;
     private List<Room> rooms;
 
 
-    public Hotel(long hotelId, String hotelName, String cityName, String address, String eMail, int rating) {
+    public Hotel(long hotelId, String hotelName, String cityName, String address, String emailHotel, int rating) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.cityName = cityName;
         this.address = address;
-        this.eMail = eMail;
+        this.emailHotel = emailHotel;
         this.rating = rating;
     }
 
@@ -41,8 +41,8 @@ public class Hotel {
         return rating;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmailHotel() {
+        return emailHotel;
     }
 
     public List<Room> getRooms() {
@@ -55,14 +55,14 @@ public class Hotel {
 
     @java.lang.Override
     public java.lang.String toString() {
-        return "Hotel{" +
+        return "Hotel[" +
                 "hotelId=" + hotelId +
                 ", hotelName='" + hotelName + '\'' +
                 ", cityName='" + cityName + '\'' +
                 ", address='" + address + '\'' +
-                ", eMail='" + eMail + '\'' +
+                ", emailHotel='" + emailHotel + '\'' +
                 ", rating=" + rating +
-                '}';
+                ']';
     }
 
     public boolean equals(Object object) {
