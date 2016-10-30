@@ -1,12 +1,12 @@
 package com.goit.hotelonlinebooking.dao;
 
 import com.goit.hotelonlinebooking.entity.User;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by user on 28.10.2016.
- */
+
 public class UserDAO extends AbstractDAO<User> {
 
     public List<User> findUserByName(String name) {
@@ -23,11 +23,18 @@ public class UserDAO extends AbstractDAO<User> {
                 .collect(Collectors.toList());
     }
 
-    public List<User> findUserByPhone(int phoneNumber) {
+    public List<User> findUserByPhone(String phoneNumber) {
 
-        return getList().stream()
-                .filter(user -> user.getUserPhoneNumber() == phoneNumber)
+        List<User> userList = new ArrayList<>();
+        if (phoneNumber.length() < 11 || phoneNumber.length() > 11) {
+            System.out.println("You input incorrect phone number.");
+        } else{
+        userList = getList().stream()
+                .filter(user -> user.getUserPhoneNumber().equals(phoneNumber))
                 .collect(Collectors.toList());
+        }
+
+        return userList;
     }
 
     public List<User> findUserByEmail(String email) {
