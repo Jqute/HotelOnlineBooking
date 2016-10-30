@@ -16,7 +16,6 @@ public class AbstractDAO<T> {
                 System.out.println("Object already exist in list");
             } else listObject.add(object);
         }
-
     }
 
     public void delete(T object) {
@@ -35,7 +34,6 @@ public class AbstractDAO<T> {
         } else {
             listObject.removeAll(listObj);
         }
-
     }
 
     public void saveList(List<T> listObj) {
@@ -52,6 +50,4 @@ public class AbstractDAO<T> {
         return listObject;
 
     }
-
-
 }
