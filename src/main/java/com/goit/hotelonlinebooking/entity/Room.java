@@ -1,21 +1,21 @@
 package com.goit.hotelonlinebooking.entity;
 
-public class Room {
-    private long roomId;
+import com.goit.hotelonlinebooking.dao.ById;
+
+public class Room extends ById {
+    private long Id;
+    private long price;
     private int floor;
     private int capacity;
     private User userReserved;
 
 
-    public Room(long roomId, int floor, int capacity, User userReserved) {
-        this.roomId = roomId;
+    public Room(long Id, int floor, int capacity, long price, User userReserved) {
+        this.Id = Id;
         this.floor = floor;
         this.capacity = capacity;
+        this.price = price;
         this.userReserved = userReserved;
-    }
-
-    public long getRoomId() {
-        return roomId;
     }
 
     public int getFloor() {
@@ -37,7 +37,7 @@ public class Room {
 
         Room room = (Room) o;
 
-        if (roomId != room.roomId) return false;
+        if (Id != room.Id) return false;
         if (floor != room.floor) return false;
         if (capacity != room.capacity) return false;
         return userReserved.equals(room.userReserved);
@@ -46,7 +46,7 @@ public class Room {
 
     @Override
     public int hashCode() {
-        int result = (int) (roomId ^ (roomId >>> 32));
+        int result = (int) (Id ^ (Id >>> 32));
         result = 31 * result + floor;
         result = 31 * result + capacity;
         result = 31 * result + userReserved.hashCode();
@@ -56,9 +56,18 @@ public class Room {
     @Override
     public String toString() {
         return "Room[" +
-                "roomId=" + roomId +
+                "Id=" + Id +
                 ", floor=" + floor +
                 ", capacity=" + capacity +
                 ']';
+    }
+
+    @Override
+    public long getId() {
+        return Id;
+    }
+
+    public long getPrice() {
+        return price;
     }
 }
