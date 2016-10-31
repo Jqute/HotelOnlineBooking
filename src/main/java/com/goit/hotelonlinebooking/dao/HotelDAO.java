@@ -29,7 +29,7 @@ public class HotelDAO extends AbstractDAO<Hotel>{
         save(new Hotel(new Random().nextLong(), "Japoshka", "Tokio",
                 "Tokio, Arigato Str", "Japoshka@ukr.net",5,roomConstruction()));
     }
-    private List<Room> roomConstruction() {     //return Rooms to some Hotel
+    private List<Room> roomConstruction() {
         List<List<Room>> roomPackage = new ArrayList<>();
         List<Room> listOne = new ArrayList<>();
         listOne.add(new Room(new Random().nextLong(), price, 1,2,null));
