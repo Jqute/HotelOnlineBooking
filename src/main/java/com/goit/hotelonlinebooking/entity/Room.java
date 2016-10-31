@@ -1,21 +1,21 @@
 package com.goit.hotelonlinebooking.entity;
 
 public class Room {
-    private long roomId;
+    private long id;
     private int floor;
     private int capacity;
     private User userReserved;
 
 
-    public Room(long roomId, int floor, int capacity, User userReserved) {
-        this.roomId = roomId;
+    public Room(long id, int floor, int capacity, User userReserved) {
+        this.id = id;
         this.floor = floor;
         this.capacity = capacity;
         this.userReserved = userReserved;
     }
 
-    public long getRoomId() {
-        return roomId;
+    public long getId() {
+        return id;
     }
 
     public int getFloor() {
@@ -37,7 +37,7 @@ public class Room {
 
         Room room = (Room) o;
 
-        if (roomId != room.roomId) return false;
+        if (id != room.id) return false;
         if (floor != room.floor) return false;
         if (capacity != room.capacity) return false;
         return userReserved.equals(room.userReserved);
@@ -46,7 +46,7 @@ public class Room {
 
     @Override
     public int hashCode() {
-        int result = (int) (roomId ^ (roomId >>> 32));
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + floor;
         result = 31 * result + capacity;
         result = 31 * result + userReserved.hashCode();
@@ -56,7 +56,7 @@ public class Room {
     @Override
     public String toString() {
         return "Room[" +
-                "roomId=" + roomId +
+                "id=" + id +
                 ", floor=" + floor +
                 ", capacity=" + capacity +
                 ']';
