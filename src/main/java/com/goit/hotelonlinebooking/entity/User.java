@@ -19,6 +19,10 @@ public class User {
         this.hashedPassword = hashedPassword;
 
     }
+
+    public User() {
+    }
+
     public long getId() {
         return id;
     }
@@ -45,6 +49,34 @@ public class User {
 
     public String getHashedPassword() {
         return hashedPassword;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     @Override
