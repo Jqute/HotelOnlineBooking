@@ -1,10 +1,13 @@
 package com.goit.hotelonlinebooking.dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class AbstractDAO<T> {
+public class AbstractDAO<T extends ById> {
 
-    private List<T> listObject = new ArrayList<T>();
+    private List<T> listObject = new ArrayList<>();
 
     public void save(T object) {
 
@@ -48,6 +51,16 @@ public class AbstractDAO<T> {
         listObject.clear();
         listObject.addAll(setObj);
 
+    }
+
+    public T objectById(long id){
+
+        for(T t : listObject){
+            if (t.getId() == id){
+                return t;
+            }
+        }
+        return  null;
     }
 
     public List<T> getList() {
