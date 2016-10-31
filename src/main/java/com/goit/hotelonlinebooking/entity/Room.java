@@ -29,6 +29,11 @@ public class Room extends ById{
 
     public long getPrice() {
         return price;
+
+    }
+
+    public User getUserReserved() {
+        return userReserved;
     }
 
     @Override
