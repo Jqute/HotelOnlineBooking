@@ -2,7 +2,7 @@ package com.goit.hotelonlinebooking.entity;
 
 import com.goit.hotelonlinebooking.dao.ById;
 
-public class Room extends ById{
+public class Room extends ById {
     private long id;
     private long price;
     private int floor;
@@ -26,10 +26,12 @@ public class Room extends ById{
         return floor;
     }
 
-
     public long getPrice() {
         return price;
+    }
 
+    public int getCapacity() {
+        return capacity;
     }
 
     public User getUserReserved() {
