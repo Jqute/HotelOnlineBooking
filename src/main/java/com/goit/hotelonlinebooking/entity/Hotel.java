@@ -1,8 +1,10 @@
 package com.goit.hotelonlinebooking.entity;
 
+import com.goit.hotelonlinebooking.dao.ById;
+
 import java.util.List;
 
-public class Hotel {
+public class Hotel extends ById{
     private long id;
     private String hotelName;
     private String cityName;
