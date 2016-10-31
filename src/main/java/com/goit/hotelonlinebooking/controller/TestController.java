@@ -1,40 +1,17 @@
 package com.goit.hotelonlinebooking.controller;
 
-/*
-//Hotel - Collection<Room>
-//Room - User userReserved
-Collection<Hotel> findHotel(String name)
-Collection<Hotel> findHotel(String city)
-void bookRoom(long roomId, long userId, long hotelId)
-void cancelReservation(long roomId, long userId, long hotelId)
-Collection<Hotel> findRoom(Map<Sring, String> params)
-
-
-//city - Kiev, hotelName - Radisson, price - 200, persons - 2
-
-registerUser(User user)
-
- */
-
-
-//import com.goit.hotelonlinebooking.dao.HotelDAO;
-//import com.goit.hotelonlinebooking.dao.RoomDAO;
 import com.goit.hotelonlinebooking.dao.UserDAO;
-import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.Random;
 
 public class TestController {
 
-    User user = new User();
-    UserDAO userDAO = new UserDAO();
-    //HotelDAO hotelDAO = new HotelDAO();
-    //RoomDAO roomDAO = new RoomDAO();
+    private User user = new User();
+    public UserDAO userDAO = new UserDAO();
 
     public void registerUser() throws IOException {
 
@@ -85,8 +62,10 @@ public class TestController {
                 user.setAge(age);
 
 
-            } catch (IOException  | NumberFormatException e) {
-                System.out.println("Wrong by input");
+            } catch (IOException | NumberFormatException e) {
+                System.out.println("Wrong by input. Input correct age");
+                throw e;
+
             }
 
             countLine2--;
@@ -99,10 +78,17 @@ public class TestController {
             System.out.print("Input User's email: ");
 
             try {
-                user.setEmail(br.readLine());
+                String email = br.readLine();
+                if (email.contains("@") && email.contains(".")) {
+                    user.setEmail(email);
+                } else {
+                    System.out.println("You input incorrect email. Re-enter email");
+                    countLine3++;
+                }
 
             } catch (IOException io) {
                 System.out.println("Wrong by input");
+
             }
 
             countLine3--;
@@ -115,7 +101,13 @@ public class TestController {
             System.out.print("Input User's phone number: ");
 
             try {
-                user.setUserPhoneNumber(br.readLine());
+                String phoneNumber = br.readLine();
+                if (phoneNumber.length() == 11) {
+                    user.setUserPhoneNumber(phoneNumber);
+                } else {
+                    System.out.println("Re-enter phone number");
+                    countLine4++;
+                }
 
             } catch (IOException io) {
                 System.out.println("Wrong by input");
@@ -130,7 +122,14 @@ public class TestController {
             System.out.print("Input password: ");
 
             try {
-                user.setHashedPassword(br.readLine());
+                String password = br.readLine();
+                if (password.length() >= 8) {
+                    user.setHashedPassword(password);
+                } else {
+                    System.out.println("Re-enter password. Character number must be 8 or more");
+                    countLine5++;
+                }
+
 
             } catch (IOException io) {
                 System.out.println("Wrong by input");
@@ -147,14 +146,7 @@ public class TestController {
 
     }
 
-    /*public List<Hotel> findHotel(String hotelName) {
 
-        for (Hotel hotel : hotelDAO.getList()) {
-
-
-        }
-        return null;
-    }*/
 
 
 }
