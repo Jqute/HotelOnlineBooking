@@ -1,6 +1,8 @@
 package com.goit.hotelonlinebooking.entity;
 
-public class User {
+import com.goit.hotelonlinebooking.dao.ById;
+
+public class User extends ById{
     private long id;
     private String name;
     private String lastName;
