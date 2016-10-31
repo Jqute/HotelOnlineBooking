@@ -1,33 +1,32 @@
 package com.goit.hotelonlinebooking.entity;
 
-import com.goit.hotelonlinebooking.dao.ById;
-
-public class Room extends ById {
-    private long Id;
+public class Room {
+    private long id;
     private long price;
     private int floor;
     private int capacity;
     private User userReserved;
 
 
-    public Room(long Id, int floor, int capacity, long price, User userReserved) {
-        this.Id = Id;
+    public Room(long id, long price, int floor, int capacity, User userReserved) {
+        this.id = id;
+        this.price = price;
         this.floor = floor;
         this.capacity = capacity;
-        this.price = price;
         this.userReserved = userReserved;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public int getFloor() {
         return floor;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
 
-    public User getUserReserved() {
-        return userReserved;
+    public long getPrice() {
+        return price;
     }
 
     @Override
@@ -37,37 +36,30 @@ public class Room extends ById {
 
         Room room = (Room) o;
 
-        if (Id != room.Id) return false;
+        if (id != room.id) return false;
+        if (price != room.price) return false;
         if (floor != room.floor) return false;
         if (capacity != room.capacity) return false;
-        return userReserved.equals(room.userReserved);
+        return userReserved != null ? userReserved.equals(room.userReserved) : room.userReserved == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (Id ^ (Id >>> 32));
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (price ^ (price >>> 32));
         result = 31 * result + floor;
         result = 31 * result + capacity;
-        result = 31 * result + userReserved.hashCode();
+        result = 31 * result + (userReserved != null ? userReserved.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Room[" +
-                "Id=" + Id +
+                "id=" + id +
                 ", floor=" + floor +
                 ", capacity=" + capacity +
                 ']';
-    }
-
-    @Override
-    public long getId() {
-        return Id;
-    }
-
-    public long getPrice() {
-        return price;
     }
 }

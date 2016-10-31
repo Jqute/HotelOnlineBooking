@@ -3,7 +3,7 @@ package com.goit.hotelonlinebooking.entity;
 import java.util.List;
 
 public class Hotel {
-    private long hotelId;
+    private long id;
     private String hotelName;
     private String cityName;
     private String address;
@@ -12,8 +12,8 @@ public class Hotel {
     private List<Room> rooms;
 
 
-    public Hotel(long hotelId, String hotelName, String cityName, String address, String emailHotel, int rating, List<Room> rooms) {
-        this.hotelId = hotelId;
+    public Hotel(long id, String hotelName, String cityName, String address, String emailHotel, int rating, List<Room> rooms) {
+        this.id = id;
         this.hotelName = hotelName;
         this.cityName = cityName;
         this.address = address;
@@ -30,8 +30,8 @@ public class Hotel {
         return hotelName;
     }
 
-    public long getHotelId() {
-        return hotelId;
+    public long getId() {
+        return id;
     }
 
     public String getAddress() {
@@ -62,7 +62,7 @@ public class Hotel {
 
         Hotel hotel = (Hotel) object;
 
-        if (getHotelId() != hotel.getHotelId()) return false;
+        if (getId() != hotel.getId()) return false;
         if (getRating() != hotel.getRating()) return false;
         if (getHotelName() != null ? !getHotelName().equals(hotel.getHotelName()) : hotel.getHotelName() != null)
             return false;
@@ -74,7 +74,7 @@ public class Hotel {
 
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (int) (getHotelId() ^ (getHotelId() >>> 32));
+        result = 31 * result + (int) (getId() ^ (getId() >>> 32));
         result = 31 * result + (getHotelName() != null ? getHotelName().hashCode() : 0);
         result = 31 * result + (getCityName() != null ? getCityName().hashCode() : 0);
         result = 31 * result + getRating();
@@ -84,7 +84,7 @@ public class Hotel {
     @Override
     public java.lang.String toString() {
         return "Hotel[" +
-                "hotelId=" + hotelId +
+                "id=" + id +
                 ", hotelName='" + hotelName + '\'' +
                 ", cityName='" + cityName + '\'' +
                 ", address='" + address + '\'' +
