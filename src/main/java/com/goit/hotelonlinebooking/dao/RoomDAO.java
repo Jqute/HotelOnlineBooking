@@ -22,7 +22,14 @@
         private void generateRooms(){
             int cntRooms = (int)Math.random()*100;
             System.out.println(cntRooms);
-            save(new Room(1,1,2,100,null));
+            save(new Room(1,1,1,100,null));
+            save(new Room(2,1,2,300,null));
+            save(new Room(3,1,3,400,null));
+            save(new Room(4,2,1,1500,null));
+            save(new Room(5,2,1,1500,null));
+            save(new Room(6,2,4,2000,null));
+            save(new Room(7,3,3,2500,null));
+            save(new Room(8,3,3,2500,null));
 
         }
 
