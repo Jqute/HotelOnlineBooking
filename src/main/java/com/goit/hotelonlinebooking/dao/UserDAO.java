@@ -26,7 +26,7 @@ public class UserDAO extends AbstractDAO<User> {
     public List<User> findUserByPhone(String phoneNumber) {
 
         List<User> userList = new ArrayList<>();
-        if (phoneNumber.length() < 11 || phoneNumber.length() > 11) {
+        if (phoneNumber.length() != 11) {
             System.out.println("You input incorrect phone number.");
         } else{
         userList = getList().stream()
