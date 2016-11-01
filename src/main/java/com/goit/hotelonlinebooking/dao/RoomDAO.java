@@ -16,7 +16,7 @@
             generateRooms();
         }
 
-        private void generateRooms(){
+        private void generateRooms(){ // TODO 
             int maxPrice =  50;
             int minPrice = 5;
             int index = 0;
