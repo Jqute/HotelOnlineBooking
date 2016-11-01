@@ -2,7 +2,6 @@ package com.goit.hotelonlinebooking.dao;
 
 import com.goit.hotelonlinebooking.entity.User;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,33 +12,44 @@ public class UserDAO extends AbstractDAO<User> {
 
     private boolean checkRegistration(User user) {
 
+        int quantityDigit = 10;
         Iterator<User> iterator = getList().iterator();
 
         boolean flag = true;
+
+
+        if (user.getUserPhoneNumber().length() != quantityDigit) {
+            System.out.println("phone number must contain 10 digits: For example 0967543231");
+            flag = false;
+        } else if (!(user.getEmail().contains("@") && user.getEmail().contains("."))) {
+            System.out.println("e-mail must contain \"@\" and \".\"");
+            flag = false;
+        }
         while (iterator.hasNext()) {
 
             User u = iterator.next();
             if (u.getId() == user.getId()) {
-                System.out.println("user with ID "+ user.getId()+" exists");
+                System.out.println("user with ID " + user.getId() + " exists");
                 flag = false;
 
             } else if (u.getEmail().equals(user.getEmail())) {
-                System.out.println("user  with email " + user.getEmail()+" exists");
+                System.out.println("user  with email " + user.getEmail() + " exists");
                 flag = false;
             } else if (u.getUserPhoneNumber().equals(user.getUserPhoneNumber())) {
-                System.out.println("user with phone number "+ user.getUserPhoneNumber() +" exists");
+                System.out.println("user with phone number " + user.getUserPhoneNumber() + " exists");
                 flag = false;
             }
 
         }
+
         return flag;
     }
 
     public void userRegistration(User user) {
 
         if (checkRegistration(user)) {
-
             save(user);
+            System.out.println("User successfully added to the database");
         }
 
     }
@@ -101,27 +111,5 @@ public class UserDAO extends AbstractDAO<User> {
 
     }
 
-    public static void main(String[] args) {
 
-
-
-        UserDAO userDAO = new UserDAO();
-
-        userDAO.save(new User(002, "A", "B", 21, "u@i.ua", "038463454", "213"));
-        userDAO.save(new User(001, "B", "B", 21, "b@i.ua", "038463454", "213"));
-        userDAO.save(new User(003, "A", "B", 21, "c@i.ua", "038463454", "213"));
-        userDAO.save(new User(004, "D", "B", 21, "u@i.ua", "038463454", "213"));
-
-        for (User u : userDAO.getList()) {
-            System.out.println(u);
-        }
-        System.out.println();
-
-        userDAO.userRegistration(new User(001, "G", "B", 23, "g@i.ua", "09374532", "123"));
-        for (User u : userDAO.getList()) {
-            System.out.println(u);
-        }
-
-
-    }
 }
