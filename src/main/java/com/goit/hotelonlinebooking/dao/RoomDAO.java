@@ -1,7 +1,4 @@
     package com.goit.hotelonlinebooking.dao;
-    /*
-    andrey.a.fedosov: version 1 - 30.10.2016/
-     */
 
     import com.goit.hotelonlinebooking.entity.Room;
     import com.goit.hotelonlinebooking.entity.User;
