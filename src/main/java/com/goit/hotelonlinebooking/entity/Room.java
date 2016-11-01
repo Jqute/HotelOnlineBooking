@@ -38,6 +38,10 @@ public class Room extends ById {
         return userReserved;
     }
 
+    public void setUserReserved(User userReserved) {
+        this.userReserved = userReserved;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
