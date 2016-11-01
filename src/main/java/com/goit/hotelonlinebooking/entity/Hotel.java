@@ -85,7 +85,7 @@ public class Hotel extends ById{
 
     @Override
     public java.lang.String toString() {
-        return "Hotel[" +
+        return "Hotel : [" +
                 "id=" + id +
                 ", hotelName='" + hotelName + '\'' +
                 ", cityName='" + cityName + '\'' +

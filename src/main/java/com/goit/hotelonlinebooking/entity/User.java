@@ -83,7 +83,7 @@ public class User extends ById{
 
     @Override
     public String toString() {
-        return "User[" +
+        return "User : [" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
