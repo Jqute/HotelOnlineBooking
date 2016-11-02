@@ -2,8 +2,10 @@ package com.goit.hotelonlinebooking.entity;
 
 import com.goit.hotelonlinebooking.dao.ById;
 
+import java.util.Random;
+
 public class User extends ById{
-    private long id;
+    private int id;
     private String name;
     private String lastName;
     private int age;
@@ -11,8 +13,8 @@ public class User extends ById{
     private String userPhoneNumber;
     private String hashedPassword;
 
-    public User(long id, String name, String lastName, int age, String email, String userPhoneNumber, String hashedPassword) {
-        this.id = id;
+    public User(String name, String lastName, int age, String email, String userPhoneNumber, String hashedPassword) {
+        id = genUserId();
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -20,6 +22,10 @@ public class User extends ById{
         this.userPhoneNumber = userPhoneNumber;
         this.hashedPassword = hashedPassword;
 
+    }
+
+    private int genUserId() {
+        return (new Random(100).nextInt());
     }
 
     public long getId() {
@@ -84,13 +90,13 @@ public class User extends ById{
     @Override
     public String toString() {
         return "User : [" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                ", userPhoneNumber=" + userPhoneNumber +
-                ", hashedPassword='" + hashedPassword + '\'' +
+                "id = " + id +
+                ", name ='" + name + '\'' +
+                ", lastName = '" + lastName + '\'' +
+                ", age = " + age +
+                ", email = '" + email + '\'' +
+                ", userPhoneNumber = " + userPhoneNumber +
+                ", hashedPassword = '" + hashedPassword + '\'' +
                 ']';
     }
 }

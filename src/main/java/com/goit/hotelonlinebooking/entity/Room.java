@@ -3,14 +3,14 @@ package com.goit.hotelonlinebooking.entity;
 import com.goit.hotelonlinebooking.dao.ById;
 
 public class Room extends ById {
-    private long id;
+    private int id;
     private long price;
     private int floor;
     private int capacity;
     private User userReserved;
 
 
-    public Room(long id, long price, int floor, int capacity, User userReserved) {
+    public Room(int id, long price, int floor, int capacity, User userReserved) {
         this.id = id;
         this.price = price;
         this.floor = floor;
@@ -70,11 +70,11 @@ public class Room extends ById {
     @Override
     public String toString() {
         return "Room : [" +
-                "id=" + id +
-                ", price=" + price +
-                ", floor=" + floor +
-                ", capacity=" + capacity +
-                ", userReserved=" + userReserved +
+                "id = " + id +
+                ", price = " + price +
+                ", floor = " + floor +
+                ", capacity = " + capacity +
+                ", userReserved = " + userReserved +
                 ']';
     }
 }
