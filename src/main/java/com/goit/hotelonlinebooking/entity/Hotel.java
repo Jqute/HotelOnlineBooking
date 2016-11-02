@@ -5,7 +5,7 @@ import com.goit.hotelonlinebooking.dao.ById;
 import java.util.List;
 
 public class Hotel extends ById{
-    private long id;
+    private int id;
     private String hotelName;
     private String cityName;
     private String address;
@@ -14,7 +14,7 @@ public class Hotel extends ById{
     private List<Room> rooms;
 
 
-    public Hotel(long id, String hotelName, String cityName, String address, String emailHotel, int rating, List<Room> rooms) {
+    public Hotel(int id, String hotelName, String cityName, String address, String emailHotel, int rating, List<Room> rooms) {
         this.id = id;
         this.hotelName = hotelName;
         this.cityName = cityName;
@@ -86,12 +86,12 @@ public class Hotel extends ById{
     @Override
     public java.lang.String toString() {
         return "Hotel : [" +
-                "id=" + id +
-                ", hotelName='" + hotelName + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", address='" + address + '\'' +
-                ", emailHotel='" + emailHotel + '\'' +
-                ", rating=" + rating +
+                "id = " + id +
+                ", hotelName = '" + hotelName + '\'' +
+                ", cityName = '" + cityName + '\'' +
+                ", address = '" + address + '\'' +
+                ", emailHotel = '" + emailHotel + '\'' +
+                ", rating = " + rating +
                 ']';
     }
 }
