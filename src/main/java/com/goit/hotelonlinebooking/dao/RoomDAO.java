@@ -154,6 +154,22 @@
 
         }
 
+        public void cancelReservation(long Id)
+        {
+            if (checkReservation(Id))
+            {
+
+                getList().stream()
+                        .filter(r -> r.getId() == Id)
+                        .forEach(u -> u.setUserReserved(null));
+            }
+            else
+            {
+                System.out.println("Sorry that room is not booked that user");
+            }
+
+        }
+
         public List<Room> findFreeRoomByPrice(int price)
         {
             try
