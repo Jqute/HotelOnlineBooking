@@ -57,6 +57,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
             fillingList.add(DBRoom.get(new Random().nextInt(roomDBSize)));
         } else {
             System.out.println("Wrong number of rooms");
+            return null;
         }
 
 //        List<List<Room>> roomPackage = new ArrayList<>();
