@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class UserDAO extends AbstractDAO<User> {
 
 
-    private boolean checkRegistration(User user) {
+    public boolean checkRegistration(User user) {
 
         int quantityDigit = 10;
         Iterator<User> iterator = getList().iterator();
@@ -43,15 +43,6 @@ public class UserDAO extends AbstractDAO<User> {
         }
 
         return flag;
-    }
-
-    public void userRegistration(User user) {
-
-        if (checkRegistration(user)) {
-            save(user);
-            System.out.println("User successfully added to the database");
-        }
-
     }
 
     public List<User> findUserByName(String name) {
