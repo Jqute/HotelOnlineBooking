@@ -2,6 +2,7 @@ package com.goit.hotelonlinebooking.dao;
 
 import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.Room;
+import com.goit.hotelonlinebooking.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,14 @@ import java.util.stream.Collectors;
 public class HotelDAO extends AbstractDAO<Hotel> {
 
     public HotelDAO() {
-        HotelFactory();
+        hotelFactory();
     }
 
+<<<<<<< HEAD
     private void HotelFactory() {
+=======
+    private void hotelFactory() {
+>>>>>>> bc63ddd0aaa21ee58af51d281277f3c8b4dc9e3d
         save(new Hotel(new Random().nextInt(), "Radisson Podil", "Kiev",
                 "Kiev, Podil", "radisson@ukr.net", 5, roomFactory(4)));
         save(new Hotel(new Random().nextInt(), "Hayat", "Kiev",
@@ -39,14 +44,24 @@ public class HotelDAO extends AbstractDAO<Hotel> {
                 "Tokio, Arigato Str", "arigato@.ucoz.ru", 5, roomFactory(4)));
     }
 
-    private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
-        List<Room> dBList = new RoomDAO().getList();  ///maybe static???!!!!
-        List<Room> initList = new ArrayList<>();
-        int roomDBSize=initList.size();
-        if (numberOfRooms>0 && numberOfRooms<=roomDBSize) {
-            dBList.add(initList.get(new Random().nextInt(roomDBSize)));
+    public Hotel findHotelByID(long hotelID) {
+        List<Hotel> foundHotels = getList().stream()
+                .filter(hotel -> hotel.getId() == hotelID).collect(Collectors.toList());
+        if (foundHotels.size() == 0 || foundHotels.size() >= 2) {
+            System.out.println("Error. With hotel ID: " + hotelID + " found more that 1 hotel...");
+            return null;
+        } else return foundHotels.get(0);
+    }
+
+      private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
+        List<Room> DBRoom = new RoomDAO().getList();  ///maybe static???!!!!
+        List<Room> fillingList = new ArrayList<>();
+        int roomDBSize = DBRoom.size();
+        if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
+            fillingList.add(DBRoom.get(new Random().nextInt(roomDBSize)));
         } else {
             System.out.println("Wrong number of rooms");
+            return null;
         }
 
 //        List<List<Room>> roomPackage = new ArrayList<>();
@@ -91,7 +106,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 //        roomPackage.add(listThree);
 //
 //        return roomPackage.get(new Random().nextInt(roomPackage.size()));
-        return dBList;
+        return fillingList;
 
     }
 
@@ -180,5 +195,53 @@ public class HotelDAO extends AbstractDAO<Hotel> {
             }
         }
         return workingDB;
+    }
+
+    void bookRoom(long roomId, long userId, long hotelId) {
+        Hotel foundHotel = findHotelByID(hotelId);
+        //Hotel foundHotel = objectById(hotelId);
+        if (foundHotel != null) {
+
+            Room foundRoom;
+            List<Room> listFoundRooms = foundHotel.getRooms().stream()
+                    .filter(room -> room.getId() == roomId)
+                    .collect(Collectors.toList());
+            if (listFoundRooms.size() == 0 || listFoundRooms.size() >= 2) {
+                System.out.println("Error. With room ID: " + roomId + " found more that 1 room...");
+                foundRoom = null;
+            } else foundRoom = listFoundRooms.get(0);
+
+            if (foundRoom != null) {
+                UserDAO userDB = new UserDAO();
+                User foundUser = userDB.objectById(userId);
+                if (foundUser != null) {
+                    foundRoom.setUserReserved(foundUser);
+                }
+            }
+
+        } else
+            System.out.println("Sorry, hotel not found");
+    }
+
+    void cancelReservation(long roomId, long userId, long hotelId) {
+        Hotel foundHotel = findHotelByID(hotelId);
+        //Hotel foundHotel = objectById(hotelId);
+        if (foundHotel != null) {
+            Room foundRoom;
+            List<Room> listFoundRooms = foundHotel.getRooms().stream()
+                    .filter(room -> room.getId() == roomId)
+                    .collect(Collectors.toList());
+            if (listFoundRooms.size() == 0 || listFoundRooms.size() >= 2) {
+                System.out.println("Error. With room ID: " + roomId + " found more that 1 room...");
+                foundRoom = null;
+            } else foundRoom = listFoundRooms.get(0);
+
+            if (foundRoom != null) {
+                if (foundRoom.getUserReserved() != null) {
+                    foundRoom.setUserReserved(null);
+                }
+            }
+        } else
+            System.out.println("Sorry, hotel not found");
     }
 }
