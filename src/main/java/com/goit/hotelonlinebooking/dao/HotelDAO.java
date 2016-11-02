@@ -17,25 +17,25 @@ public class HotelDAO extends AbstractDAO<Hotel> {
     }
 
     private void HotelFactory() {
-        save(new Hotel(new Random().nextLong(), "Radisson Podil", "Kiev",
+        save(new Hotel(new Random().nextInt(), "Radisson Podil", "Kiev",
                 "Kiev, Podil", "radisson@ukr.net", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextLong(), "Hayat", "Kiev",
+        save(new Hotel(new Random().nextInt(), "Hayat", "Kiev",
                 "Kiev, Center", "hayat@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "Bratislava", "Kiev",
+        save(new Hotel(new Random().nextInt(), "Bratislava", "Kiev",
                 "Kiev, Darnitsa", "bratislava@ukr.net", 4, roomFactory(6)));
-        save(new Hotel(new Random().nextLong(), "Gendel", "Rostov",
+        save(new Hotel(new Random().nextInt(), "Gendel", "Rostov",
                 "Rostov, DownTown", "gendel@mail.ru", 3, roomFactory(1)));
-        save(new Hotel(new Random().nextLong(), "Radisson Alushta", "Alushta",
+        save(new Hotel(new Random().nextInt(), "Radisson Alushta", "Alushta",
                 "Alushta beach", "radissonalushta@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "HOTEL-ka", "Moscow",
+        save(new Hotel(new Random().nextInt(), "HOTEL-ka", "Moscow",
                 "Moscow, Kremlin", "hotelka@rambler.ru", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "Big Ben Hotel", "London",
+        save(new Hotel(new Random().nextInt(), "Big Ben Hotel", "London",
                 "Pasadena Str 7", "bb@london.uk", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextLong(), "Svitanok", "Zhitomir",
+        save(new Hotel(new Random().nextInt(), "Svitanok", "Zhitomir",
                 "Zhitomir, Pavlova 5", "Svitanok@ukr.net", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "Hertz Hotel", "Berlin",
+        save(new Hotel(new Random().nextInt(), "Hertz Hotel", "Berlin",
                 "Berlin, AntaresPlatz", "Hertz@nsdap.de", 5, roomFactory(6)));
-        save(new Hotel(new Random().nextLong(), "Japoshka", "Tokio",
+        save(new Hotel(new Random().nextInt(), "Japoshka", "Tokio",
                 "Tokio, Arigato Str", "arigato@.ucoz.ru", 5, roomFactory(4)));
     }
 
