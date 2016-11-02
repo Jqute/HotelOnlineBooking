@@ -2,6 +2,7 @@ package com.goit.hotelonlinebooking.dao;
 
 import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.Room;
+import com.goit.hotelonlinebooking.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,37 +14,46 @@ import java.util.stream.Collectors;
 public class HotelDAO extends AbstractDAO<Hotel> {
 
     public HotelDAO() {
-        HotelFactory();
+        hotelFactory();
     }
 
-    private void HotelFactory() {
-        save(new Hotel(new Random().nextLong(), "Radisson Podil", "Kiev",
+    private void hotelFactory() {
+        save(new Hotel(new Random().nextInt(), "Radisson Podil", "Kiev",
                 "Kiev, Podil", "radisson@ukr.net", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextLong(), "Hayat", "Kiev",
+        save(new Hotel(new Random().nextInt(), "Hayat", "Kiev",
                 "Kiev, Center", "hayat@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "Bratislava", "Kiev",
+        save(new Hotel(new Random().nextInt(), "Bratislava", "Kiev",
                 "Kiev, Darnitsa", "bratislava@ukr.net", 4, roomFactory(6)));
-        save(new Hotel(new Random().nextLong(), "Gendel", "Rostov",
+        save(new Hotel(new Random().nextInt(), "Gendel", "Rostov",
                 "Rostov, DownTown", "gendel@mail.ru", 3, roomFactory(1)));
-        save(new Hotel(new Random().nextLong(), "Radisson Alushta", "Alushta",
+        save(new Hotel(new Random().nextInt(), "Radisson Alushta", "Alushta",
                 "Alushta beach", "radissonalushta@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "HOTEL-ka", "Moscow",
+        save(new Hotel(new Random().nextInt(), "HOTEL-ka", "Moscow",
                 "Moscow, Kremlin", "hotelka@rambler.ru", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "Big Ben Hotel", "London",
+        save(new Hotel(new Random().nextInt(), "Big Ben Hotel", "London",
                 "Pasadena Str 7", "bb@london.uk", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextLong(), "Svitanok", "Zhitomir",
+        save(new Hotel(new Random().nextInt(), "Svitanok", "Zhitomir",
                 "Zhitomir, Pavlova 5", "Svitanok@ukr.net", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextLong(), "Hertz Hotel", "Berlin",
+        save(new Hotel(new Random().nextInt(), "Hertz Hotel", "Berlin",
                 "Berlin, AntaresPlatz", "Hertz@nsdap.de", 5, roomFactory(6)));
-        save(new Hotel(new Random().nextLong(), "Japoshka", "Tokio",
+        save(new Hotel(new Random().nextInt(), "Japoshka", "Tokio",
                 "Tokio, Arigato Str", "arigato@.ucoz.ru", 5, roomFactory(4)));
+    }
+
+    public Hotel findHotelByID(long hotelID) {
+        List<Hotel> foundHotels = getList().stream()
+                .filter(hotel -> hotel.getId() == hotelID).collect(Collectors.toList());
+        if (foundHotels.size() == 0 || foundHotels.size() >= 2) {
+            System.out.println("Error. With hotel ID: " + hotelID + " found more that 1 hotel...");
+            return null;
+        } else return foundHotels.get(0);
     }
 
     private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
         List<Room> dBList = new RoomDAO().getList();  ///maybe static???!!!!
         List<Room> initList = new ArrayList<>();
-        int roomDBSize=initList.size();
-        if (numberOfRooms>0 && numberOfRooms<=roomDBSize) {
+        int roomDBSize = initList.size();
+        if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
             dBList.add(initList.get(new Random().nextInt(roomDBSize)));
         } else {
             System.out.println("Wrong number of rooms");
@@ -180,5 +190,53 @@ public class HotelDAO extends AbstractDAO<Hotel> {
             }
         }
         return workingDB;
+    }
+
+    void bookRoom(long roomId, long userId, long hotelId) {
+        Hotel foundHotel = findHotelByID(hotelId);
+        //Hotel foundHotel = objectById(hotelId);
+        if (foundHotel != null) {
+
+            Room foundRoom;
+            List<Room> listFoundRooms = foundHotel.getRooms().stream()
+                    .filter(room -> room.getId() == roomId)
+                    .collect(Collectors.toList());
+            if (listFoundRooms.size() == 0 || listFoundRooms.size() >= 2) {
+                System.out.println("Error. With room ID: " + roomId + " found more that 1 room...");
+                foundRoom = null;
+            } else foundRoom = listFoundRooms.get(0);
+
+            if (foundRoom != null) {
+                UserDAO userDB = new UserDAO();
+                User foundUser = userDB.objectById(userId);
+                if (foundUser != null) {
+                    foundRoom.setUserReserved(foundUser);
+                }
+            }
+
+        } else
+            System.out.println("Sorry, hotel not found");
+    }
+
+    void cancelReservation(long roomId, long userId, long hotelId) {
+        Hotel foundHotel = findHotelByID(hotelId);
+        //Hotel foundHotel = objectById(hotelId);
+        if (foundHotel != null) {
+            Room foundRoom;
+            List<Room> listFoundRooms = foundHotel.getRooms().stream()
+                    .filter(room -> room.getId() == roomId)
+                    .collect(Collectors.toList());
+            if (listFoundRooms.size() == 0 || listFoundRooms.size() >= 2) {
+                System.out.println("Error. With room ID: " + roomId + " found more that 1 room...");
+                foundRoom = null;
+            } else foundRoom = listFoundRooms.get(0);
+
+            if (foundRoom != null) {
+                if (foundRoom.getUserReserved() != null) {
+                    foundRoom.setUserReserved(null);
+                }
+            }
+        } else
+            System.out.println("Sorry, hotel not found");
     }
 }
