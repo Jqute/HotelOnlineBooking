@@ -57,11 +57,11 @@
             List<Room> roomList = getList().stream()
                                             .filter(r -> r.getId() == Id)
                                             .collect(Collectors.toList());
-            Room room  = roomList.get(0);
+            return roomList.get(0);
             }
             catch (IndexOutOfBoundsException | NullPointerException a)
             {
-                System.out.println("Не найдено ниодной комнаты с таким ID");
+                System.out.println("The room hasn't been found with that ID");
 
             }
             return null;
