@@ -49,12 +49,12 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         } else return foundHotels.get(0);
     }
 
-    private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
-        List<Room> dBList = new RoomDAO().getList();  ///maybe static???!!!!
-        List<Room> initList = new ArrayList<>();
-        int roomDBSize = initList.size();
+      private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
+        List<Room> DBRoom = new RoomDAO().getList();  ///maybe static???!!!!
+        List<Room> fillingList = new ArrayList<>();
+        int roomDBSize = DBRoom.size();
         if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
-            dBList.add(initList.get(new Random().nextInt(roomDBSize)));
+            fillingList.add(DBRoom.get(new Random().nextInt(roomDBSize)));
         } else {
             System.out.println("Wrong number of rooms");
         }
@@ -101,7 +101,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 //        roomPackage.add(listThree);
 //
 //        return roomPackage.get(new Random().nextInt(roomPackage.size()));
-        return dBList;
+        return fillingList;
 
     }
 
