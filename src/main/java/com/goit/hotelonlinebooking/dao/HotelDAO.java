@@ -17,30 +17,28 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         hotelFactory();
     }
 
-<<<<<<< HEAD
-    private void HotelFactory() {
-=======
+
     private void hotelFactory() {
->>>>>>> bc63ddd0aaa21ee58af51d281277f3c8b4dc9e3d
-        save(new Hotel(new Random().nextInt(), "Radisson Podil", "Kiev",
+
+        save(new Hotel(new Random().nextInt(1000), "Radisson Podil", "Kiev",
                 "Kiev, Podil", "radisson@ukr.net", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextInt(), "Hayat", "Kiev",
+        save(new Hotel(new Random().nextInt(1000), "Hayat", "Kiev",
                 "Kiev, Center", "hayat@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(), "Bratislava", "Kiev",
+        save(new Hotel(new Random().nextInt(1000), "Bratislava", "Kiev",
                 "Kiev, Darnitsa", "bratislava@ukr.net", 4, roomFactory(6)));
-        save(new Hotel(new Random().nextInt(), "Gendel", "Rostov",
+        save(new Hotel(new Random().nextInt(1000), "Gendel", "Rostov",
                 "Rostov, DownTown", "gendel@mail.ru", 3, roomFactory(1)));
-        save(new Hotel(new Random().nextInt(), "Radisson Alushta", "Alushta",
+        save(new Hotel(new Random().nextInt(1000), "Radisson Alushta", "Alushta",
                 "Alushta beach", "radissonalushta@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(), "HOTEL-ka", "Moscow",
+        save(new Hotel(new Random().nextInt(1000), "HOTEL-ka", "Moscow",
                 "Moscow, Kremlin", "hotelka@rambler.ru", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(), "Big Ben Hotel", "London",
+        save(new Hotel(new Random().nextInt(1000), "Big Ben Hotel", "London",
                 "Pasadena Str 7", "bb@london.uk", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextInt(), "Svitanok", "Zhitomir",
+        save(new Hotel(new Random().nextInt(1000), "Svitanok", "Zhitomir",
                 "Zhitomir, Pavlova 5", "Svitanok@ukr.net", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(), "Hertz Hotel", "Berlin",
+        save(new Hotel(new Random().nextInt(1000), "Hertz Hotel", "Berlin",
                 "Berlin, AntaresPlatz", "Hertz@nsdap.de", 5, roomFactory(6)));
-        save(new Hotel(new Random().nextInt(), "Japoshka", "Tokio",
+        save(new Hotel(new Random().nextInt(1000), "Japoshka", "Tokio",
                 "Tokio, Arigato Str", "arigato@.ucoz.ru", 5, roomFactory(4)));
     }
 
@@ -54,15 +52,23 @@ public class HotelDAO extends AbstractDAO<Hotel> {
     }
 
       private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
-        List<Room> DBRoom = new RoomDAO().getList();  ///maybe static???!!!!
-        List<Room> fillingList = new ArrayList<>();
-        int roomDBSize = DBRoom.size();
-        if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
-            fillingList.add(DBRoom.get(new Random().nextInt(roomDBSize)));
-        } else {
-            System.out.println("Wrong number of rooms");
-            return null;
-        }
+          List<Room> DBRoom = new RoomDAO().getList();  ///maybe static???!!!!
+          List<Room> fillingList = new ArrayList<>();
+          if (DBRoom!=null) {
+
+              int roomDBSize = DBRoom.size();
+              if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
+                  fillingList.add(DBRoom.get(new Random().nextInt(roomDBSize)));
+              } else {
+                  System.out.println("Wrong number of rooms");
+                  return null;
+              }
+          } else
+          {
+              System.out.println("Sorry, Room's DB unavailable");
+              return null;
+          }
+          return fillingList;
 
 //        List<List<Room>> roomPackage = new ArrayList<>();
 //        List<Room> listOne = new ArrayList<>();
@@ -106,7 +112,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 //        roomPackage.add(listThree);
 //
 //        return roomPackage.get(new Random().nextInt(roomPackage.size()));
-        return fillingList;
+
 
     }
 
@@ -244,4 +250,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         } else
             System.out.println("Sorry, hotel not found");
     }
+
+
+
 }
