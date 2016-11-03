@@ -3,6 +3,7 @@
     import com.goit.hotelonlinebooking.entity.Room;
     import com.goit.hotelonlinebooking.entity.User;
     import java.util.List;
+    import java.util.function.BooleanSupplier;
     import java.util.stream.Collectors;
 
 
@@ -67,6 +68,8 @@
             return null;
         }
 
+
+
         public List<Room> getRoomByUser (User user)
         {
             try
@@ -123,10 +126,47 @@
 
         public void bookRoom(long Id,User user)
         {
+            if (!checkReservation(Id))
+            {
+                    getList().stream()
+                            .filter(r -> r.getId() == Id)
+                            .forEach(u -> u.setUserReserved(user));
+            }
+            else
+            {
+                System.out.println("Sorry that room is not available for booking");
+            }
 
         }
         public void cancelReservation(long Id, User user)
         {
+            if (checkReservation(Id,user))
+            {
+
+                getList().stream()
+                        .filter(r -> r.getId() == Id)
+                        .forEach(u -> u.setUserReserved(null));
+            }
+            else
+            {
+                System.out.println("Sorry that room is not booked that user");
+            }
+
+        }
+
+        public void cancelReservation(long Id)
+        {
+            if (checkReservation(Id))
+            {
+
+                getList().stream()
+                        .filter(r -> r.getId() == Id)
+                        .forEach(u -> u.setUserReserved(null));
+            }
+            else
+            {
+                System.out.println("Sorry that room is not booked that user");
+            }
 
         }
 
