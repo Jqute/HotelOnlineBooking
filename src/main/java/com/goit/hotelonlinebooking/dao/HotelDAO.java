@@ -4,17 +4,16 @@ import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.Room;
 import com.goit.hotelonlinebooking.entity.User;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class HotelDAO extends AbstractDAO<Hotel> {
 
+
     public HotelDAO() {
         hotelFactory();
+
     }
 
 
@@ -22,7 +21,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 
         save(new Hotel(new Random().nextInt(1000), "Radisson Podil", "Kiev",
                 "Kiev, Podil", "radisson@ukr.net", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextInt(1000), "Hayat", "Kiev",
+        save(new Hotel(1, "Hayat", "Kiev",
                 "Kiev, Center", "hayat@ukr.net", 5, roomFactory(5)));
         save(new Hotel(new Random().nextInt(1000), "Bratislava", "Kiev",
                 "Kiev, Darnitsa", "bratislava@ukr.net", 4, roomFactory(6)));
@@ -42,7 +41,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
                 "Tokio, Arigato Str", "arigato@.ucoz.ru", 5, roomFactory(4)));
     }
 
-    public Hotel findHotelByID(long hotelID) {
+    public Hotel findHotelByID(int hotelID) {
         List<Hotel> foundHotels = getList().stream()
                 .filter(hotel -> hotel.getId() == hotelID).collect(Collectors.toList());
         if (foundHotels.size() == 0 || foundHotels.size() >= 2) {
@@ -51,24 +50,24 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         } else return foundHotels.get(0);
     }
 
-      private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
-          List<Room> DBRoom = new RoomDAO().getList();  ///maybe static???!!!!
-          List<Room> fillingList = new ArrayList<>();
-          if (DBRoom!=null) {
+    private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
+        List<Room> DBRoom = new RoomDAO().getList();  ///maybe static???!!!!
+        List<Room> fillingList = new ArrayList<>();
+        if (DBRoom != null) {
 
-              int roomDBSize = DBRoom.size();
-              if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
-                  fillingList.add(DBRoom.get(new Random().nextInt(roomDBSize)));
-              } else {
-                  System.out.println("Wrong number of rooms");
-                  return null;
-              }
-          } else
-          {
-              System.out.println("Sorry, Room's DB unavailable");
-              return null;
-          }
-          return fillingList;
+            int roomDBSize = DBRoom.size();
+            if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
+                for (int i = 0; i < numberOfRooms; i++)
+                    fillingList.add(i, DBRoom.get(i));
+            } else if (numberOfRooms > roomDBSize) {
+                for (int i = 0; i < roomDBSize; i++)
+                    fillingList.add(i, DBRoom.get(i));
+            }
+        } else {
+            System.out.println("Sorry, Room's DB unavailable");
+            return null;
+        }
+        return fillingList;
 
 //        List<List<Room>> roomPackage = new ArrayList<>();
 //        List<Room> listOne = new ArrayList<>();
@@ -117,6 +116,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
     }
 
     public List<Hotel> findHotelByHotelName(String hotelName) {
+
         return getList().stream()
                 .filter(n -> hotelName.equals(n.getHotelName()))
                 .collect(Collectors.toList());
@@ -127,6 +127,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
                 .filter(n -> hotelCity.equals(n.getCityName()))
                 .collect(Collectors.toList());
     }
+
 
     public List<Hotel> findRoom(Map<String, String> params) {
         List<Hotel> workingDB = new ArrayList<>();
@@ -203,9 +204,9 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         return workingDB;
     }
 
-    void bookRoom(long roomId, long userId, long hotelId) {
-        Hotel foundHotel = findHotelByID(hotelId);
-        //Hotel foundHotel = objectById(hotelId);
+    void bookRoom(long roomId, long userId, int hotelId) {
+        //Hotel foundHotel = findHotelByID(hotelId);
+        Hotel foundHotel = objectById(hotelId);
         if (foundHotel != null) {
 
             Room foundRoom;
@@ -229,7 +230,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
             System.out.println("Sorry, hotel not found");
     }
 
-    void cancelReservation(long roomId, long userId, long hotelId) {
+    void cancelReservation(long roomId, long userId, int hotelId) {
         Hotel foundHotel = findHotelByID(hotelId);
         //Hotel foundHotel = objectById(hotelId);
         if (foundHotel != null) {
@@ -250,7 +251,6 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         } else
             System.out.println("Sorry, hotel not found");
     }
-
 
 
 }
