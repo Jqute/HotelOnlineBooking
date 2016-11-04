@@ -32,7 +32,7 @@ public class Hotel extends ById{
         return hotelName;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

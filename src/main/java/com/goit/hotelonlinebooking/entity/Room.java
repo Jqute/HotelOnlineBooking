@@ -18,7 +18,7 @@ public class Room extends ById {
         this.userReserved = userReserved;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
