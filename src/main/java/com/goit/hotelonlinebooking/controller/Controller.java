@@ -58,7 +58,7 @@ public class Controller {
     }
 
 
-    public List<Room> getFreeRoomsbyHotel(String nameHotel) {
+    public List<Room> getFreeRoomsByHotel(String nameHotel) {
 
         List<Room> list = new ArrayList<>();
         Iterator<Hotel> iterator = hotelDAO.getList().iterator();
@@ -93,7 +93,6 @@ public class Controller {
     void bookRoom(int roomId, int userId, int hotelId) {
 
         if (currentUser.getCurrentUser() != null) {
-            //Hotel foundHotel = hotelDAO.findHotelByID(hotelId);
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
 
@@ -125,7 +124,6 @@ public class Controller {
     void cancelReservation(long roomId, long userId, int hotelId) {
 
         if (currentUser !=null) {
-            //Hotel foundHotel = findHotelByID(hotelId);
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
                 Room foundRoom;
@@ -147,7 +145,7 @@ public class Controller {
         }else System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
     }
 
-
+// TODO must remove the excess code
     public List<Hotel> findRoom(Map<String, String> params) {
         List<Hotel> workingDB = new ArrayList<>(new HotelDAO().getList());
 
@@ -223,36 +221,4 @@ public class Controller {
         return workingDB;
     }
 
-    public static void main(String[] args) {
-
-        HotelDAO hotelDAO = new HotelDAO();
-
-
-        Controller controller = new Controller();
-
-        controller.userRegistration(new User(01, "Vladimir", "Mischenko", 35, "usonictw@bigmir.net", "0937354341", "123"));
-        controller.userRegistration(new User(02, "Ivan", "Ivanov", 16, "ivanov@bigmir.net", "0957344444", "123"));
-        controller.currentUser.setCurrentUser(controller.userDAO.objectById(01));
-
-        for (Hotel h : controller.findHotelByCity("Kiev")) {
-            System.out.println(h);
-        }
-
-        System.out.println();
-
-        for (Room r : controller.getFreeRoomsbyHotel("Hayat")) {
-            System.out.println(r);
-        }
-
-        controller.bookRoom(2, 01, 1);
-        System.out.println();
-
-
-        for (Room r : controller.getFreeRoomsbyHotel("Hayat")) {
-            System.out.println(r);
-        }
-
-
     }
-
-}
