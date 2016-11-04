@@ -5,10 +5,7 @@ import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.Room;
 import com.goit.hotelonlinebooking.entity.User;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Controller {
@@ -123,7 +120,7 @@ public class Controller {
 
     void cancelReservation(long roomId, long userId, int hotelId) {
 
-        if (currentUser !=null) {
+        if (currentUser != null) {
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
                 Room foundRoom;
@@ -142,83 +139,63 @@ public class Controller {
                 }
             } else
                 System.out.println("Sorry, hotel not found");
-        }else System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+        } else System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
     }
 
-// TODO must remove the excess code
-    public List<Hotel> findRoom(Map<String, String> params) {
-        List<Hotel> workingDB = new ArrayList<>(new HotelDAO().getList());
+    //
+    public List findRoom(Map<String, String> params) {
+        List<Room> roomList = new ArrayList<>();
 
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            String fieldName = entry.getKey();
-            String fieldValue = entry.getValue();
+        try {
 
-            switch (fieldName) {
-                case "hotelName":
-                    workingDB = workingDB.stream()
-                            .filter(x -> x.getHotelName().equals(fieldValue))
-                            .collect(Collectors.toList());
-                    break;
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                String fieldName = entry.getKey();
+                String fieldValue = entry.getValue();
 
-                case "cityName":
-                    workingDB = workingDB.stream()
-                            .filter(x -> x.getCityName().equals(fieldValue))
-                            .collect(Collectors.toList());
-                    break;
+                switch (fieldName) {
+                    case "price":
 
-                case "address":
-                    workingDB = workingDB.stream()
-                            .filter(x -> x.getAddress().equals(fieldValue))
-                            .collect(Collectors.toList());
-                    break;
+                        roomList.addAll(roomDAO.getList().stream()
+                                .filter(r -> r.getPrice() == Integer.valueOf(fieldValue))
+                                .collect(Collectors.toList()));
 
-                case "rating":
-                    workingDB = workingDB.stream()
-                            .filter(x -> x.getRating() == Integer.valueOf(fieldValue))
-                            .collect(Collectors.toList());
-                    break;
+                        break;
 
-                case "price":
+                    case "floor":
+                        roomList.addAll(roomDAO.getList().stream()
+                                .filter(x -> x.getFloor() == Integer.valueOf(fieldValue))
+                                .collect(Collectors.toList()));
+                        break;
 
-                    workingDB = workingDB.stream().filter(hotel -> {
-                        List<Room> list = hotel.getRooms();
-                        list = list.stream()
-                                .filter(x -> x.getPrice() == Integer.valueOf(fieldValue))
-                                .collect(Collectors.toList());
-                        long foundEntries = list.size();
-
-                        if (foundEntries == 0) {
-                            return false;
-                        } else {
-                            hotel.setRooms(list);
-                            return true;
-                        }
-                    }).collect(Collectors.toList());
-                    break;
-
-                case "capacity":
-                    workingDB = workingDB.stream().filter(hotel -> {
-                        List<Room> list = hotel.getRooms();
-                        list = list.stream()
+                    case "capacity":
+                        roomList.addAll(roomDAO.getList().stream()
                                 .filter(x -> x.getCapacity() == Integer.valueOf(fieldValue))
-                                .collect(Collectors.toList());
-                        long foundEntries = list.size();
+                                .collect(Collectors.toList()));
+                        break;
 
-                        if (foundEntries == 0) {
-                            return false;
-                        } else {
-                            hotel.setRooms(list);
-                            return true;
-                        }
-                    }).collect(Collectors.toList());
-                    break;
+                    case "userReserved":
 
-                default:
-                    System.out.println("Parameter \'" + fieldName + "\' given to method FindRoom() is wrong. Interrupted");
-                    return null;
+                        roomList.addAll(roomDAO.getList().stream()
+                                .filter(x -> x.getUserReserved().equals(fieldValue))
+                                .collect(Collectors.toList()));
+
+                        break;
+
+                    default:
+                        System.out.println("Parameter \'" + fieldName + "\' given to method FindRoom() is wrong. Interrupted");
+
+                }
+
             }
+
+            return roomList;
+
+        } catch (NumberFormatException | NullPointerException e) {
+            System.out.println("input parameters should be of type string");
+            return roomList;
+
         }
-        return workingDB;
     }
 
-    }
+
+}
