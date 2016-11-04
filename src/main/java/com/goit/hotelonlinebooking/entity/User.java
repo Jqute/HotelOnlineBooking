@@ -13,8 +13,8 @@ public class User extends ById{
     private String userPhoneNumber;
     private String hashedPassword;
 
-    public User(String name, String lastName, int age, String email, String userPhoneNumber, String hashedPassword) {
-        id = genUserId();
+    public User(int id, String name, String lastName, int age, String email, String userPhoneNumber, String hashedPassword) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
