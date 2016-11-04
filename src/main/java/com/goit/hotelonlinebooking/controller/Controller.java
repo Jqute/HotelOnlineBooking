@@ -27,15 +27,22 @@ public class Controller {
 
     public List<Hotel> findHotelByHotelName(String hotelName) {
 
-        List<Hotel> hotelList = hotelDAO.getList().stream()
-                .filter(n -> hotelName.equals(n.getHotelName()))
-                .collect(Collectors.toList());
+        List<Hotel> hotelList = new ArrayList<>();
+        if (currentUser.getCurrentUser() != null) {
+            hotelList = hotelDAO.getList().stream()
+                    .filter(n -> hotelName.equals(n.getHotelName()))
+                    .collect(Collectors.toList());
 
 
-        if (hotelList.size() != 0) return hotelList;
-        else {
-            System.out.println("Hotel " + hotelName + " is not found");
+            if (hotelList.size() != 0) return hotelList;
+            else {
+                System.out.println("Hotel " + hotelName + " is not found");
+                return hotelList;
+            }
+        } else {
+            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
             return hotelList;
+
         }
 
     }
@@ -43,13 +50,20 @@ public class Controller {
 
     public List<Hotel> findHotelByCity(String hotelCity) {
 
-        List<Hotel> hotelList = hotelDAO.getList().stream()
-                .filter(n -> hotelCity.equals(n.getCityName()))
-                .collect(Collectors.toList());
+        List<Hotel> hotelList = new ArrayList<>();
 
-        if (hotelList.size() != 0) return hotelList;
-        else {
-            System.out.println("user with that Name is not found");
+        if (currentUser.getCurrentUser() != null) {
+            hotelList = hotelDAO.getList().stream()
+                    .filter(n -> hotelCity.equals(n.getCityName()))
+                    .collect(Collectors.toList());
+
+            if (hotelList.size() != 0) return hotelList;
+            else {
+                System.out.println("user with that Name is not found");
+                return hotelList;
+            }
+        }else {
+            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
             return hotelList;
         }
     }
@@ -120,7 +134,7 @@ public class Controller {
 
     void cancelReservation(long roomId, long userId, int hotelId) {
 
-        if (currentUser != null) {
+        if (currentUser.getCurrentUser() != null) {
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
                 Room foundRoom;
@@ -195,6 +209,15 @@ public class Controller {
             return roomList;
 
         }
+    }
+
+    public static void main(String[] args) {
+
+
+        Controller controller = new Controller();
+        controller.userRegistration(new User(01, "Vlfd", "gfhgf", 43, "fd@u.ua", "0932455676", "1234"));
+        controller.currentUser.setCurrentUser(controller.userDAO.objectById(01));
+        controller.findHotelByCity("Kiev");
     }
 
 
