@@ -28,7 +28,7 @@ public class User extends ById{
         return (new Random(100).nextInt());
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
