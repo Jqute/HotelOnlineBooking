@@ -16,6 +16,7 @@ public class Controller {
     private RoomDAO roomDAO = new RoomDAO();
     private HotelDAO hotelDAO = new HotelDAO();
     private UserDAO userDAO = new UserDAO();
+    private CurrentUser currentUser = new CurrentUser();
 
 
     public void userRegistration(User user) {
@@ -57,57 +58,94 @@ public class Controller {
     }
 
 
-    public List<Room> getFreeRoomsbyHotel (String nameHotel) {
+    public List<Room> getFreeRoomsbyHotel(String nameHotel) {
 
         List<Room> list = new ArrayList<>();
         Iterator<Hotel> iterator = hotelDAO.getList().iterator();
 
-        int countHotel = 1;
-        while (iterator.hasNext()) {
+        if (currentUser.getCurrentUser() != null) {
 
-            Hotel h = iterator.next();
 
-            if (h.getHotelName().equals(nameHotel)) {
-                System.out.println("The hotel " + nameHotel + "#" + countHotel + " has the following rooms available:");
-                countHotel++;
-                list = h.getRooms().stream()
-                        .filter(r -> r.getUserReserved() == null)
-                        .collect(Collectors.toList());
+            int countHotel = 1;
+            while (iterator.hasNext()) {
 
-            }
-        }
+                Hotel h = iterator.next();
 
-        if(countHotel == 1) System.out.println("Hotel with a name " + nameHotel + " not found");
-        return list;
-    }
+                if (h.getHotelName().equals(nameHotel)) {
+                    System.out.println("The hotel " + nameHotel + "#" + countHotel + " has the following rooms available:");
+                    countHotel++;
+                    list = h.getRooms().stream()
+                            .filter(r -> r.getUserReserved() == null)
+                            .collect(Collectors.toList());
 
-    void bookRoom(int roomId, int userId, int hotelId) {
-        //Hotel foundHotel = hotelDAO.findHotelByID(hotelId);
-        Hotel foundHotel = hotelDAO.objectById(hotelId);
-        if (foundHotel != null) {
-
-            Room foundRoom;
-            List<Room> listFoundRooms = foundHotel.getRooms().stream()
-                    .filter(room -> room.getId() == roomId)
-                    .collect(Collectors.toList());
-            if (listFoundRooms.size() == 0 || listFoundRooms.size() >= 2) {
-                System.out.println("Error. With room ID: " + roomId + " found more that 1 room...");
-                foundRoom = null;
-            } else foundRoom = listFoundRooms.get(0);
-
-            if (foundRoom != null) {
-                UserDAO userDB = userDAO;
-                User foundUser = userDB.objectById(userId);
-                if (foundUser != null) {
-                    foundRoom.setUserReserved(foundUser);
                 }
             }
 
-        } else
-            System.out.println("Sorry, hotel not found");
+            if (countHotel == 1) System.out.println("Hotel with a name " + nameHotel + " not found");
+            return list;
+
+        } else {
+            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+            return list;
+        }
     }
 
+    void bookRoom(int roomId, int userId, int hotelId) {
 
+        if (currentUser.getCurrentUser() != null) {
+            //Hotel foundHotel = hotelDAO.findHotelByID(hotelId);
+            Hotel foundHotel = hotelDAO.objectById(hotelId);
+            if (foundHotel != null) {
+
+                Room foundRoom;
+                List<Room> listFoundRooms = foundHotel.getRooms().stream()
+                        .filter(room -> room.getId() == roomId)
+                        .collect(Collectors.toList());
+                if (listFoundRooms.size() == 0 || listFoundRooms.size() >= 2) {
+                    System.out.println("Error. With room ID: " + roomId + " found more that 1 room...");
+                    foundRoom = null;
+                } else foundRoom = listFoundRooms.get(0);
+
+                if (foundRoom != null) {
+                    UserDAO userDB = userDAO;
+                    User foundUser = userDB.objectById(userId);
+                    if (foundUser != null) {
+                        foundRoom.setUserReserved(foundUser);
+                    }
+                }
+
+            } else
+                System.out.println("Sorry, hotel not found");
+
+        } else
+            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+
+    }
+
+    void cancelReservation(long roomId, long userId, int hotelId) {
+
+        if (currentUser !=null) {
+            //Hotel foundHotel = findHotelByID(hotelId);
+            Hotel foundHotel = hotelDAO.objectById(hotelId);
+            if (foundHotel != null) {
+                Room foundRoom;
+                List<Room> listFoundRooms = foundHotel.getRooms().stream()
+                        .filter(room -> room.getId() == roomId)
+                        .collect(Collectors.toList());
+                if (listFoundRooms.size() == 0 || listFoundRooms.size() >= 2) {
+                    System.out.println("Error. With room ID: " + roomId + " found more that 1 room...");
+                    foundRoom = null;
+                } else foundRoom = listFoundRooms.get(0);
+
+                if (foundRoom != null) {
+                    if (foundRoom.getUserReserved() != null) {
+                        foundRoom.setUserReserved(null);
+                    }
+                }
+            } else
+                System.out.println("Sorry, hotel not found");
+        }else System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+    }
 
 
     public List<Hotel> findRoom(Map<String, String> params) {
@@ -194,6 +232,7 @@ public class Controller {
 
         controller.userRegistration(new User(01, "Vladimir", "Mischenko", 35, "usonictw@bigmir.net", "0937354341", "123"));
         controller.userRegistration(new User(02, "Ivan", "Ivanov", 16, "ivanov@bigmir.net", "0957344444", "123"));
+        controller.currentUser.setCurrentUser(controller.userDAO.objectById(01));
 
         for (Hotel h : controller.findHotelByCity("Kiev")) {
             System.out.println(h);
@@ -201,7 +240,7 @@ public class Controller {
 
         System.out.println();
 
-        for (Room r : controller.getFreeRoomsbyHotel("Hayat")){
+        for (Room r : controller.getFreeRoomsbyHotel("Hayat")) {
             System.out.println(r);
         }
 
@@ -209,11 +248,9 @@ public class Controller {
         System.out.println();
 
 
-        for (Room r : controller.getFreeRoomsbyHotel("Hayat")){
+        for (Room r : controller.getFreeRoomsbyHotel("Hayat")) {
             System.out.println(r);
         }
-
-
 
 
     }
