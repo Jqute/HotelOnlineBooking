@@ -2,17 +2,20 @@ package com.goit.hotelonlinebooking.dao;
 
 import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.Room;
-import com.goit.hotelonlinebooking.entity.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 
 public class HotelDAO extends AbstractDAO<Hotel> {
 
+    public RoomDAO roomDAO = new RoomDAO();
 
     public HotelDAO() {
         hotelFactory();
+
 
     }
 
@@ -51,7 +54,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
     }
 
     private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
-        List<Room> DBRoom = new RoomDAO().getList();  ///maybe static???!!!!
+        List<Room> DBRoom = roomDAO.getList();  ///maybe static???!!!!
         List<Room> fillingList = new ArrayList<>();
         if (DBRoom != null) {
 
@@ -69,52 +72,6 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         }
         return fillingList;
 
-//        List<List<Room>> roomPackage = new ArrayList<>();
-//        List<Room> listOne = new ArrayList<>();
-//        listOne.add(new Room(new Random().nextLong(), 1_000, 1, 2, null));
-//        listOne.add(new Room(new Random().nextLong(), 15_000, 1, 2, null));
-//        listOne.add(new Room(new Random().nextLong(), 11_000, 1, 1, null));
-//        listOne.add(new Room(new Random().nextLong(), 6_000, 1, 2, null));
-//        listOne.add(new Room(new Random().nextLong(), 7_000, 1, 2, null));
-//        listOne.add(new Room(new Random().nextLong(), 2_000, 1, 2, null));
-//        listOne.add(new Room(new Random().nextLong(), 3_000, 1, 2, null));
-//        listOne.add(new Room(new Random().nextLong(), 2_000, 1, 1, null));
-//        listOne.add(new Room(new Random().nextLong(), 2_500, 1, 2, null));
-//        listOne.add(new Room(new Random().nextLong(), 77_000, 1, 2, null));
-//
-//        List<Room> listTwo = new ArrayList<>();
-//        listTwo.add(new Room(new Random().nextLong(), 17_000, 1, 2, null));
-//        listTwo.add(new Room(new Random().nextLong(), 2_000, 1, 1, null));
-//        listTwo.add(new Room(new Random().nextLong(), 1_632, 1, 2, null));
-//        listTwo.add(new Room(new Random().nextLong(), 1_600, 1, 2, null));
-//        listTwo.add(new Room(new Random().nextLong(), 5_000, 1, 2, null));
-//        listTwo.add(new Room(new Random().nextLong(), 7_000, 1, 2, null));
-//        listTwo.add(new Room(new Random().nextLong(), 11_000, 2, 2, null));
-//        listTwo.add(new Room(new Random().nextLong(), 1_500, 1, 2, null));
-//        listTwo.add(new Room(new Random().nextLong(), 2_000, 1, 1, null));
-//        listTwo.add(new Room(new Random().nextLong(), 6_000, 1, 2, null));
-//
-//        List<Room> listThree = new ArrayList<>();
-//        listThree.add(new Room(new Random().nextLong(), 12_000, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 5_452, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 3_632, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 2_000, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 5_000, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 5_000, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 11_000, 1, 1, null));
-//        listThree.add(new Room(new Random().nextLong(), 2_000, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 5_500, 1, 2, null));
-//        listThree.add(new Room(new Random().nextLong(), 7_000, 1, 2, null));
-//
-//        roomPackage.add(listOne);
-//        roomPackage.add(listTwo);
-//        roomPackage.add(listThree);
-//
-//        return roomPackage.get(new Random().nextInt(roomPackage.size()));
-
-
     }
-
-
 
 }
