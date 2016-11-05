@@ -1,16 +1,19 @@
 package com.goit.hotelonlinebooking.controller;
 
-import com.goit.hotelonlinebooking.dao.*;
+import com.goit.hotelonlinebooking.dao.HotelDAO;
+import com.goit.hotelonlinebooking.dao.UserDAO;
 import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.Room;
 import com.goit.hotelonlinebooking.entity.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Controller {
 
-    private RoomDAO roomDAO = new RoomDAO();
     private HotelDAO hotelDAO = new HotelDAO();
     private UserDAO userDAO = new UserDAO();
     private CurrentUser currentUser = new CurrentUser();
@@ -40,7 +43,7 @@ public class Controller {
                 return hotelList;
             }
         } else {
-            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+            System.out.println("perform user authentication. Use the method \"currentUser.setCurrentUser\"");
             return hotelList;
 
         }
@@ -63,7 +66,7 @@ public class Controller {
                 return hotelList;
             }
         }else {
-            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+            System.out.println("perform user authentication. Use the method \"currentUser.setCurrentUser\"");
             return hotelList;
         }
     }
@@ -96,7 +99,7 @@ public class Controller {
             return list;
 
         } else {
-            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+            System.out.println("perform user authentication. Use the method \"currentUser.setCurrentUser\"");
             return list;
         }
     }
@@ -128,7 +131,7 @@ public class Controller {
                 System.out.println("Sorry, hotel not found");
 
         } else
-            System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+            System.out.println("perform user authentication. Use the method \"currentUser.setCurrentUser\"");
 
     }
 
@@ -153,71 +156,60 @@ public class Controller {
                 }
             } else
                 System.out.println("Sorry, hotel not found");
-        } else System.out.println("perform user authentication. Use the method \"getCurrentUser\"");
+        } else System.out.println("perform user authentication. Use the method \"currentUser.setCurrentUser\"");
     }
 
     //
     public List findRoom(Map<String, String> params) {
         List<Room> roomList = new ArrayList<>();
+        if (currentUser.getCurrentUser() != null) {
 
-        try {
+            try {
 
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                String fieldName = entry.getKey();
-                String fieldValue = entry.getValue();
+                for (Map.Entry<String, String> entry : params.entrySet()) {
+                    String fieldName = entry.getKey();
+                    String fieldValue = entry.getValue();
 
-                switch (fieldName) {
-                    case "price":
+                    switch (fieldName) {
+                        case "price":
 
-                        roomList.addAll(roomDAO.getList().stream()
-                                .filter(r -> r.getPrice() == Integer.valueOf(fieldValue))
-                                .collect(Collectors.toList()));
+                            roomList.addAll(hotelDAO.roomDAO.getList().stream()
+                                    .filter(r -> r.getPrice() == Integer.valueOf(fieldValue))
+                                    .collect(Collectors.toList()));
 
-                        break;
+                            break;
 
-                    case "floor":
-                        roomList.addAll(roomDAO.getList().stream()
-                                .filter(x -> x.getFloor() == Integer.valueOf(fieldValue))
-                                .collect(Collectors.toList()));
-                        break;
+                        case "floor":
+                            roomList.addAll(hotelDAO.roomDAO.getList().stream()
+                                    .filter(x -> x.getFloor() == Integer.valueOf(fieldValue))
+                                    .collect(Collectors.toList()));
+                            break;
 
-                    case "capacity":
-                        roomList.addAll(roomDAO.getList().stream()
-                                .filter(x -> x.getCapacity() == Integer.valueOf(fieldValue))
-                                .collect(Collectors.toList()));
-                        break;
+                        case "capacity":
+                            roomList.addAll(hotelDAO.roomDAO.getList().stream()
+                                    .filter(x -> x.getCapacity() == Integer.valueOf(fieldValue))
+                                    .collect(Collectors.toList()));
+                            break;
 
-                    case "userReserved":
 
-                        roomList.addAll(roomDAO.getList().stream()
-                                .filter(x -> x.getUserReserved().equals(fieldValue))
-                                .collect(Collectors.toList()));
+                        default:
+                            System.out.println("Parameter \'" + fieldName + "\' given to method FindRoom() is wrong. Interrupted");
 
-                        break;
-
-                    default:
-                        System.out.println("Parameter \'" + fieldName + "\' given to method FindRoom() is wrong. Interrupted");
+                    }
 
                 }
 
+                return roomList;
+
+            } catch (NumberFormatException | NullPointerException e) {
+                System.out.println("input parameters should be of type string");
+                return roomList;
+
             }
-
+        } else {
+            System.out.println("perform user authentication. Use the method \"currentUser.setCurrentUser\"");
             return roomList;
-
-        } catch (NumberFormatException | NullPointerException e) {
-            System.out.println("input parameters should be of type string");
-            return roomList;
-
         }
-    }
-
-    public static void main(String[] args) {
-
-
-        Controller controller = new Controller();
-        controller.userRegistration(new User(01, "Vlfd", "gfhgf", 43, "fd@u.ua", "0932455676", "1234"));
-        controller.currentUser.setCurrentUser(controller.userDAO.objectById(01));
-        controller.findHotelByCity("Kiev");
     }
 
 
