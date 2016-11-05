@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public class HotelDAO extends AbstractDAO<Hotel> {
 
-    public RoomDAO roomDAO = new RoomDAO();
-
     public HotelDAO() {
         hotelFactory();
 
