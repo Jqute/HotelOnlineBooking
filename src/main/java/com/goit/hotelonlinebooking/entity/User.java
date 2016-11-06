@@ -1,10 +1,8 @@
 package com.goit.hotelonlinebooking.entity;
 
-import com.goit.hotelonlinebooking.dao.ById;
-
 import java.util.Random;
 
-public class User extends ById{
+public class User extends WithId {
     private int id;
     private String name;
     private String lastName;
