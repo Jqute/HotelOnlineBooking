@@ -11,7 +11,6 @@ public class Hotel extends WithId {
     private int rating;
     private List<Room> rooms;
 
-
     public Hotel(int id, String hotelName, String cityName, String address, String emailHotel, int rating, List<Room> rooms) {
         this.id = id;
         this.hotelName = hotelName;
