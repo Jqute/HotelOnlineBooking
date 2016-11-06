@@ -173,20 +173,20 @@ public class Controller {
                     switch (fieldName) {
                         case "price":
 
-                            roomList.addAll(hotelDAO.roomDAO.getList().stream()
+                            roomList.addAll(hotelDAO.getAllRoom().stream()
                                     .filter(r -> r.getPrice() == Integer.valueOf(fieldValue))
                                     .collect(Collectors.toList()));
 
                             break;
 
                         case "floor":
-                            roomList.addAll(hotelDAO.roomDAO.getList().stream()
+                            roomList.addAll(hotelDAO.getAllRoom().stream()
                                     .filter(x -> x.getFloor() == Integer.valueOf(fieldValue))
                                     .collect(Collectors.toList()));
                             break;
 
                         case "capacity":
-                            roomList.addAll(hotelDAO.roomDAO.getList().stream()
+                            roomList.addAll(hotelDAO.getAllRoom().stream()
                                     .filter(x -> x.getCapacity() == Integer.valueOf(fieldValue))
                                     .collect(Collectors.toList()));
                             break;
