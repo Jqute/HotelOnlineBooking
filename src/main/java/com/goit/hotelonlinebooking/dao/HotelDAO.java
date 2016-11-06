@@ -13,10 +13,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 
     public HotelDAO() {
         hotelFactory();
-
-
     }
-
 
     private void hotelFactory() {
 
@@ -55,7 +52,6 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         List<Room> DBRoom = generateRooms(false);  ///maybe static???!!!! false - static, true - automatic
         List<Room> fillingList = new ArrayList<>();
         if (DBRoom != null) {
-
             int roomDBSize = DBRoom.size();
             if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
                 for (int i = 0; i < numberOfRooms; i++)
@@ -72,9 +68,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 
     }
     private  List<Room> generateRooms(boolean auto){
-
         List<Room> roomList = new ArrayList<>();
-
         if (!auto)
         {
             Random random = new Random();
@@ -95,7 +89,6 @@ public class HotelDAO extends AbstractDAO<Hotel> {
             int maxPrice = 5;
             int minPrice = 0;
             int index = Math.abs(random.nextInt());
-
             for (int i = 1; i <= countOfFloor; i++) {
                 for (int k = 1; k <= 5; k++) {
                     int capacity = 1 + (Math.abs(random.nextInt()) * ((4 - 1) + 1));
@@ -109,13 +102,9 @@ public class HotelDAO extends AbstractDAO<Hotel> {
     }
 
     public List<Room> getAllRoom(){
-
         List<Room> roomList = new ArrayList<>();
-
         for(int i = 0; i > getList().size(); i++)
         roomList.addAll(getList().get(i).getRooms());
         return roomList;
     }
-
-
 }
