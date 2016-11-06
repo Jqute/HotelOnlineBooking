@@ -1,11 +1,13 @@
 package com.goit.hotelonlinebooking.dao;
 
+import com.goit.hotelonlinebooking.entity.WithId;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AbstractDAO<T extends ById> {
+public class AbstractDAO<T extends WithId> {
 
     private List<T> listObject = new ArrayList<>();
 

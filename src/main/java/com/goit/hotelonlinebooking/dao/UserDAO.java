@@ -9,15 +9,10 @@ import java.util.stream.Collectors;
 
 public class UserDAO extends AbstractDAO<User> {
 
-
     public boolean checkRegistration(User user) {
-
         int quantityDigit = 10;
         Iterator<User> iterator = getList().iterator();
-
         boolean flag = true;
-
-
         if (user.getUserPhoneNumber().length() != quantityDigit) {
             System.out.println("phone number must contain 10 digits: For example 0967543231");
             flag = false;
@@ -26,12 +21,10 @@ public class UserDAO extends AbstractDAO<User> {
             flag = false;
         }
         while (iterator.hasNext()) {
-
             User u = iterator.next();
             if (u.getId() == user.getId()) {
                 System.out.println("user with ID " + user.getId() + " exists");
                 flag = false;
-
             } else if (u.getEmail().equals(user.getEmail())) {
                 System.out.println("user  with email " + user.getEmail() + " exists");
                 flag = false;
@@ -39,18 +32,14 @@ public class UserDAO extends AbstractDAO<User> {
                 System.out.println("user with phone number " + user.getUserPhoneNumber() + " exists");
                 flag = false;
             }
-
         }
-
         return flag;
     }
 
     public List<User> findUserByName(String name) {
-
         List<User> userList = getList().stream()
                 .filter(user -> user.getName().equals(name))
                 .collect(Collectors.toList());
-
         if (userList.size() != 0) return userList;
         else {
             System.out.println("user with that Name is not found");
@@ -59,48 +48,39 @@ public class UserDAO extends AbstractDAO<User> {
     }
 
     public List<User> findUserByLastName(String lastName) {
-
         List<User> userList = getList().stream()
                 .filter(user -> user.getLastName().equals(lastName))
                 .collect(Collectors.toList());
-
         if (userList.size() != 0) return userList;
         else {
             System.out.println("user with that LastName is not found");
             return userList;
         }
-
     }
 
     public List<User> findUserByPhone(String phoneNumber) {
-
         List<User> userList = getList().stream()
                 .filter(user -> user.getUserPhoneNumber().equals(phoneNumber))
                 .collect(Collectors.toList());
-
-        if (userList.size() != 0) return userList;
+        if (userList.size() != 0) {
+            return userList;
+        }
         else {
             System.out.println("user with that phone Number is not found");
             return userList;
         }
-
     }
 
     public List<User> findUserByEmail(String email) {
-
         List<User> userList = getList().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .collect(Collectors.toList());
-
         if (userList.size() != 0) {
             return userList;
         } else {
             System.out.println("User with that email is not found");
             return userList;
         }
-
-
     }
-
-
 }
+
