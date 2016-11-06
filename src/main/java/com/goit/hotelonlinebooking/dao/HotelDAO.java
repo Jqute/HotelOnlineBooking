@@ -108,5 +108,14 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         return roomList;
     }
 
+    public List<Room> getAllRoom(){
+
+        List<Room> roomList = new ArrayList<>();
+
+        for(int i = 0; i > getList().size(); i++)
+        roomList.addAll(getList().get(i).getRooms());
+        return roomList;
+    }
+
 
 }
