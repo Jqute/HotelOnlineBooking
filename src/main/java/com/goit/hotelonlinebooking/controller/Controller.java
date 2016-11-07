@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Controller {
 
-    private HotelDAO hotelDAO = new HotelDAO();
+    public HotelDAO hotelDAO = new HotelDAO();
     private UserDAO userDAO = new UserDAO();
     private CurrentUser currentUser = new CurrentUser();
     private boolean flagLogin;
@@ -84,7 +84,7 @@ public class Controller {
         }
     }
 
-    void bookRoom(int roomId, int userId, int hotelId) {
+    public void bookRoom(int roomId, int userId, int hotelId) {
         if (flagLogin) {
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
@@ -113,7 +113,7 @@ public class Controller {
         }
     }
 
-    void cancelReservation(long roomId, long userId, int hotelId) {
+    public void cancelReservation(long roomId, long userId, int hotelId) {
         if (flagLogin) {
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
@@ -147,9 +147,9 @@ public class Controller {
                     String fieldValue = entry.getValue();
                     switch (fieldName) {
                         case "price":
-                            roomList.addAll(hotelDAO.getAllRoom().stream()
+                            roomList = hotelDAO.getAllRoom().stream()
                                     .filter(r -> r.getPrice() == Integer.valueOf(fieldValue))
-                                    .collect(Collectors.toList()));
+                                    .collect(Collectors.toList());
                             break;
                         case "floor":
                             roomList.addAll(hotelDAO.getAllRoom().stream()
@@ -185,8 +185,11 @@ public class Controller {
         catch (NullPointerException e){
             System.out.println("Sorry. This user does not exist");
         }
+    }
 
+    public List<Hotel> getAllHotel(){
 
+        return hotelDAO.getList();
     }
 }
 

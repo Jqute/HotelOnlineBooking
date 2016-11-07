@@ -2,13 +2,13 @@ package com.goit.hotelonlinebooking.entity;
 
 public class Room extends WithId {
     private int id;
-    private long price;
+    private int price;
     private int floor;
     private int capacity;
     private User userReserved;
 
 
-    public Room(int id, long price, int floor, int capacity, User userReserved) {
+    public Room(int id, int price, int floor, int capacity, User userReserved) {
         this.id = id;
         this.price = price;
         this.floor = floor;
@@ -24,7 +24,7 @@ public class Room extends WithId {
         return floor;
     }
 
-    public long getPrice() {
+    public int getPrice() {
         return price;
     }
 
