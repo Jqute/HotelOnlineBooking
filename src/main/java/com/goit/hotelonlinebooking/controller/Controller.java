@@ -84,7 +84,7 @@ public class Controller {
         }
     }
 
-    void bookRoom(int roomId, int userId, int hotelId) {
+    public void bookRoom(int roomId, int userId, int hotelId) {
         if (flagLogin) {
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
@@ -113,7 +113,7 @@ public class Controller {
         }
     }
 
-    void cancelReservation(long roomId, long userId, int hotelId) {
+    public void cancelReservation(long roomId, long userId, int hotelId) {
         if (flagLogin) {
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
@@ -185,8 +185,6 @@ public class Controller {
         catch (NullPointerException e){
             System.out.println("Sorry. This user does not exist");
         }
-
-
     }
 }
 
