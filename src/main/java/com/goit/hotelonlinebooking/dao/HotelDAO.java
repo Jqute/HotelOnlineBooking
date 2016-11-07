@@ -18,25 +18,18 @@ public class HotelDAO extends AbstractDAO<Hotel> {
     private void hotelFactory() {
 
         save(new Hotel(new Random().nextInt(1000), "Radisson Podil", "Kiev",
-                "Kiev, Podil", "radisson@ukr.net", 5, roomFactory(4)));
+                "Kiev, Podil", "radisson@ukr.net", 5, roomFactory(10)));
         save(new Hotel(1, "Hayat", "Kiev",
-                "Kiev, Center", "hayat@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(1000), "Bratislava", "Kiev",
-                "Kiev, Darnitsa", "bratislava@ukr.net", 4, roomFactory(6)));
-        save(new Hotel(new Random().nextInt(1000), "Gendel", "Rostov",
-                "Rostov, DownTown", "gendel@mail.ru", 3, roomFactory(1)));
+                "Kiev, Center", "hayat@ukr.net", 5, roomFactory(10)));
+        save(new Hotel(new Random().nextInt(1000), "Bratislava", "Dnepr",
+                "Dnepr, Truda", "bratislava@ukr.net", 4, roomFactory(10)));
+        save(new Hotel(new Random().nextInt(1000), "Gendel", "Dnepr",
+                "Dnepr, DownTown", "gendel@gmail.com", 3, roomFactory(10)));
         save(new Hotel(new Random().nextInt(1000), "Radisson Alushta", "Alushta",
-                "Alushta beach", "radissonalushta@ukr.net", 5, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(1000), "HOTEL-ka", "Moscow",
-                "Moscow, Kremlin", "hotelka@rambler.ru", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(1000), "Big Ben Hotel", "London",
-                "Pasadena Str 7", "bb@london.uk", 5, roomFactory(4)));
-        save(new Hotel(new Random().nextInt(1000), "Svitanok", "Zhitomir",
-                "Zhitomir, Pavlova 5", "Svitanok@ukr.net", 4, roomFactory(5)));
-        save(new Hotel(new Random().nextInt(1000), "Hertz Hotel", "Berlin",
-                "Berlin, AntaresPlatz", "Hertz@nsdap.de", 5, roomFactory(6)));
-        save(new Hotel(new Random().nextInt(1000), "Japoshka", "Tokio",
-                "Tokio, Arigato Str", "arigato@.ucoz.ru", 5, roomFactory(4)));
+                "Alushta beach", "radissonalushta@ukr.net", 5, roomFactory(10)));
+        save(new Hotel(new Random().nextInt(1000), "HOTEL-ka", "Alushta",
+                "Alushta, center", "hotelka@rambler.ru", 4, roomFactory(10)));
+
     }
 
     public Hotel findHotelByID(int hotelID) {
@@ -69,7 +62,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
     }
     private  List<Room> generateRooms(boolean auto){
         List<Room> roomList = new ArrayList<>();
-        if (!auto)
+        if (auto)
         {
             Random random = new Random();
             roomList.add(new Room(Math.abs(random.nextInt()),100,1,1,null));
