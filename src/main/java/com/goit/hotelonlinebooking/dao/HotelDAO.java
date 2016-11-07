@@ -4,6 +4,7 @@ import com.goit.hotelonlinebooking.entity.Hotel;
 import com.goit.hotelonlinebooking.entity.Room;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -81,7 +82,7 @@ public class HotelDAO extends AbstractDAO<Hotel> {
             int countOfFloor = 4;
             int maxPrice = 8;
             int minPrice = 1;
-            int index = Math.abs(random.nextInt());
+            int index = 0;
             for (int i = 1; i <= countOfFloor; i++) {
                 for (int k = 1; k <= 5; k++) {
                     int capacity = Math.abs(random.ints(1,5).limit(1).findFirst().getAsInt());
@@ -96,8 +97,11 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 
     public List<Room> getAllRoom(){
         List<Room> roomList = new ArrayList<>();
-        for(int i = 0; i > getList().size(); i++)
-        roomList.addAll(getList().get(i).getRooms());
+        Iterator<Hotel> iterator = getList().iterator();
+        while (iterator.hasNext()){
+            Hotel h = iterator.next();
+            roomList.addAll(h.getRooms());
+        }
         return roomList;
     }
 }
