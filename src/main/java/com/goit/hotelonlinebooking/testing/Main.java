@@ -1,4 +1,4 @@
-package com.goit.hotelonlinebooking.Testing;
+package com.goit.hotelonlinebooking.testing;
 
 import com.goit.hotelonlinebooking.controller.Controller;
 import com.goit.hotelonlinebooking.entity.Hotel;
