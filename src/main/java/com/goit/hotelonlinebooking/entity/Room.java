@@ -1,8 +1,6 @@
 package com.goit.hotelonlinebooking.entity;
 
-import com.goit.hotelonlinebooking.dao.ById;
-
-public class Room extends ById {
+public class Room extends WithId {
     private int id;
     private long price;
     private int floor;
