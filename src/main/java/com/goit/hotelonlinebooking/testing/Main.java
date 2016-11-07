@@ -55,7 +55,6 @@ public class Main {
         }
         System.out.println();
 
-
         //Search rooms for their parameters
         Map<String, String> paramRoom = new HashMap<>();
         paramRoom.put("price", "200");
