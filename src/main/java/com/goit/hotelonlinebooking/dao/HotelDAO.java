@@ -86,13 +86,13 @@ public class HotelDAO extends AbstractDAO<Hotel> {
 
             Random random = new Random();
             int countOfFloor = 4;
-            int maxPrice = 5;
-            int minPrice = 0;
+            int maxPrice = 8;
+            int minPrice = 1;
             int index = Math.abs(random.nextInt());
             for (int i = 1; i <= countOfFloor; i++) {
                 for (int k = 1; k <= 5; k++) {
-                    int capacity = 1 + (Math.abs(random.nextInt()) * ((4 - 1) + 1));
-                    int price = (minPrice * capacity + (Math.abs(random.nextInt()) * ((maxPrice * capacity - minPrice * capacity) + 1))) * 100;
+                    int capacity = Math.abs(random.ints(1,5).limit(1).findFirst().getAsInt());
+                    int price = (capacity * Math.abs(random.ints(minPrice,maxPrice).limit(1).findFirst().getAsInt())* 100);
                     index++;
                     roomList.add(new Room(index, price, i, capacity, null));
                 }
