@@ -2,7 +2,6 @@ package com.goit.hotelonlinebooking.controller;
 
 import com.goit.hotelonlinebooking.entity.User;
 
-
 public class CurrentUser {
 
     private User currentUser;

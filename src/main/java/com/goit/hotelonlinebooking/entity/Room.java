@@ -7,7 +7,6 @@ public class Room extends WithId {
     private int capacity;
     private User userReserved;
 
-
     public Room(int id, int price, int floor, int capacity, User userReserved) {
         this.id = id;
         this.price = price;
@@ -52,7 +51,6 @@ public class Room extends WithId {
         if (floor != room.floor) return false;
         if (capacity != room.capacity) return false;
         return userReserved != null ? userReserved.equals(room.userReserved) : room.userReserved == null;
-
     }
 
     @Override

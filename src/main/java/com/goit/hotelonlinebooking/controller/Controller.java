@@ -38,7 +38,7 @@ public class Controller {
                 return hotelList;
             }
         } else {
-            System.out.println("perform user authentication. Use the method \"Login\"");
+            System.out.println("perform user authentication. Use the method \"login\"");
             return hotelList;
         }
     }
@@ -54,8 +54,8 @@ public class Controller {
                 System.out.println("user with that Name is not found");
                 return hotelList;
             }
-        }else {
-            System.out.println("perform user authentication. Use the method \"Login\"");
+        } else {
+            System.out.println("perform user authentication. Use the method \"login\"");
             return hotelList;
         }
     }
@@ -79,7 +79,7 @@ public class Controller {
                 System.out.println("Hotel with a name " + nameHotel + " not found");
             return list;
         } else {
-            System.out.println("perform user authentication. Use the method \"Login\"");
+            System.out.println("perform user authentication. Use the method \"login\"");
             return list;
         }
     }
@@ -109,11 +109,11 @@ public class Controller {
                 System.out.println("Sorry, hotel not found");
             }
         } else {
-            System.out.println("perform user authentication. Use the method \"Login\"");
+            System.out.println("perform user authentication. Use the method \"login\"");
         }
     }
 
-    public void cancelReservation(long roomId, long userId, int hotelId) {
+    public void cancelReservation(long roomId, int hotelId) {
         if (flagLogin) {
             Hotel foundHotel = hotelDAO.objectById(hotelId);
             if (foundHotel != null) {
@@ -128,13 +128,13 @@ public class Controller {
                     foundRoom = listFoundRooms.get(0);
                 }
                 if (foundRoom != null && foundRoom.getUserReserved() != null) {
-                        foundRoom.setUserReserved(null);
+                    foundRoom.setUserReserved(null);
                 }
             } else {
                 System.out.println("Sorry, hotel not found");
             }
         } else {
-            System.out.println("perform user authentication. Use the method \"Login\"");
+            System.out.println("perform user authentication. Use the method \"login\"");
         }
     }
 
@@ -171,24 +171,22 @@ public class Controller {
                 return roomList;
             }
         } else {
-            System.out.println("perform user authentication. Use the method \"Login\"");
+            System.out.println("perform user authentication. Use the method \"login\"");
             return roomList;
         }
     }
 
-    public void Login(int id) {
+    public void login(int id) {
         flagLogin = false;
         try {
             currentUser.setCurrentUser(userDAO.objectById(id));
             flagLogin = true;
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Sorry. This user does not exist");
         }
     }
 
-    public List<Hotel> getAllHotel(){
-
+    public List<Hotel> getAllHotel() {
         return hotelDAO.getList();
     }
 }
