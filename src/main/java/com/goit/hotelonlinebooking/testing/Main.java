@@ -1,4 +1,4 @@
-package com.goit.hotelonlinebooking.Testing;
+package com.goit.hotelonlinebooking.testing;
 
 import com.goit.hotelonlinebooking.controller.Controller;
 import com.goit.hotelonlinebooking.entity.Hotel;
@@ -8,10 +8,7 @@ import com.goit.hotelonlinebooking.entity.User;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by user on 07.11.2016.
- */
-public class Test {
+public class Main {
 
     public static void main(String[] args) {
 
@@ -22,19 +19,19 @@ public class Test {
         controller.userRegistration(new User(003, "Ivan", "Sidorov", 32, "sidorov@i.ua", "0978763434", "987"));
 
         //authorize a user
-        controller.Login(01);
+        controller.login(01);
 
         //search for hotels by city
         controller.findHotelByCity("Kiev");
 
         //search for hotels by name hotel
-        for (Hotel h : controller.findHotelByHotelName("Hayat")){
+        for (Hotel h : controller.findHotelByHotelName("Hayat")) {
             System.out.println(h);
         }
         System.out.println();
 
         //output display list of free rooms by hotel
-        for (Room r :controller.getFreeRoomsByHotel("Hayat")){
+        for (Room r : controller.getFreeRoomsByHotel("Hayat")) {
             System.out.println(r);
         }
 
@@ -45,19 +42,18 @@ public class Test {
         controller.bookRoom(4, 2, 1);
         System.out.println();
 
-        for (Room r :controller.getFreeRoomsByHotel("Hayat")){
+        for (Room r : controller.getFreeRoomsByHotel("Hayat")) {
             System.out.println(r);
         }
         System.out.println();
 
         //Cancel Reservation
-        controller.cancelReservation(4, 2, 1);
+        controller.cancelReservation(4, 1);
 
-        for (Room r :controller.getFreeRoomsByHotel("Hayat")){
+        for (Room r : controller.getFreeRoomsByHotel("Hayat")) {
             System.out.println(r);
         }
         System.out.println();
-
 
         //Search rooms for their parameters
         Map<String, String> paramRoom = new HashMap<>();

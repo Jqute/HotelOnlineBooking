@@ -31,7 +31,7 @@ public class AbstractDAO<T extends WithId> {
         } else {
             if (listObject.contains(object)) {
                 listObject.remove(object);
-            }else System.out.println("Object "+object + " does not exist");
+            } else System.out.println("Object " + object + " does not exist");
 
         }
 
@@ -41,7 +41,7 @@ public class AbstractDAO<T extends WithId> {
 
         if (listObject.isEmpty()) {
             System.out.println("Objects list is empty");
-        } else if(listObj.containsAll(listObj)) {
+        } else if (listObj.containsAll(listObj)) {
             listObject.removeAll(listObj);
         } else System.out.println("enter the correct list of users you want to delete");
     }
@@ -55,14 +55,14 @@ public class AbstractDAO<T extends WithId> {
 
     }
 
-    public T objectById(long id){
+    public T objectById(long id) {
 
-        for(T t : listObject){
-            if (t.getId() == id){
+        for (T t : listObject) {
+            if (t.getId() == id) {
                 return t;
             }
         }
-        return  null;
+        return null;
     }
 
     public List<T> getList() {

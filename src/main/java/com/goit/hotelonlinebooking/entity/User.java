@@ -19,7 +19,6 @@ public class User extends WithId {
         this.email = email;
         this.userPhoneNumber = userPhoneNumber;
         this.hashedPassword = hashedPassword;
-
     }
 
     private int genUserId() {
@@ -54,7 +53,6 @@ public class User extends WithId {
         return hashedPassword;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,7 +68,6 @@ public class User extends WithId {
         if (userPhoneNumber != null ? !userPhoneNumber.equals(user.userPhoneNumber) : user.userPhoneNumber != null)
             return false;
         return hashedPassword != null ? hashedPassword.equals(user.hashedPassword) : user.hashedPassword == null;
-
     }
 
     @Override

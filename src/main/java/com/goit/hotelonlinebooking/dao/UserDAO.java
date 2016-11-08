@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class UserDAO extends AbstractDAO<User> {
 
     public boolean checkRegistration(User user) {
@@ -64,8 +63,7 @@ public class UserDAO extends AbstractDAO<User> {
                 .collect(Collectors.toList());
         if (userList.size() != 0) {
             return userList;
-        }
-        else {
+        } else {
             System.out.println("user with that phone Number is not found");
             return userList;
         }
