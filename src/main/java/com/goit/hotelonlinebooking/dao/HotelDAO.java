@@ -42,8 +42,8 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         }
     }
 
-    private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
-        List<Room> DBRoom = generateRooms(false);  ///maybe static???!!!! false - static, true - automatic
+    private List<Room> roomFactory(int numberOfRooms) {
+        List<Room> DBRoom = generateRooms(false);
         List<Room> fillingList = new ArrayList<>();
         if (DBRoom != null) {
             int roomDBSize = DBRoom.size();
