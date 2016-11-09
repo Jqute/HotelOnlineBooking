@@ -39,8 +39,9 @@ public class UserDAO extends AbstractDAO<User> {
         List<User> userList = getList().stream()
                 .filter(user -> user.getName().equals(name))
                 .collect(Collectors.toList());
-        if (userList.size() != 0) return userList;
-        else {
+        if (userList.size() != 0) {
+            return userList;
+        } else {
             System.out.println("User with that Name is not found");
             return userList;
         }
@@ -50,8 +51,9 @@ public class UserDAO extends AbstractDAO<User> {
         List<User> userList = getList().stream()
                 .filter(user -> user.getLastName().equals(lastName))
                 .collect(Collectors.toList());
-        if (userList.size() != 0) return userList;
-        else {
+        if (userList.size() != 0) {
+            return userList;
+        } else {
             System.out.println("User with that LastName is not found");
             return userList;
         }

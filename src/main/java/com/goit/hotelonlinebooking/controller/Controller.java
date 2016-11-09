@@ -32,8 +32,9 @@ public class Controller {
             hotelList = this.hotelDAO.getList().stream()
                     .filter(n -> hotelName.equals(n.getHotelName()))
                     .collect(Collectors.toList());
-            if (hotelList.size() != 0) return hotelList;
-            else {
+            if (hotelList.size() != 0) {
+                return hotelList;
+            } else {
                 System.out.println("Hotel " + hotelName + " is not found");
                 return hotelList;
             }
@@ -49,8 +50,9 @@ public class Controller {
             hotelList = this.hotelDAO.getList().stream()
                     .filter(n -> hotelCity.equals(n.getCityName()))
                     .collect(Collectors.toList());
-            if (hotelList.size() != 0) return hotelList;
-            else {
+            if (hotelList.size() != 0) {
+                return hotelList;
+            } else {
                 System.out.println("User with that Name is not found");
                 return hotelList;
             }
@@ -73,7 +75,9 @@ public class Controller {
                             .collect(Collectors.toList());
                 }
             }
-            if (list.isEmpty()) System.out.println("Hotel with a name " + nameHotel + " not found");
+            if (list.isEmpty()) {
+                System.out.println("Hotel with a name " + nameHotel + " not found");
+            }
             return list;
         } else {
             System.out.println("Perform user authentication. Use the method \"login\"");
