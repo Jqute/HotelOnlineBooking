@@ -47,9 +47,7 @@ public class AbstractDAO<T extends WithId> {
     }
 
     public void saveList(List<T> listObj) {
-        this.listObject.addAll(listObj);
         Set<T> setObj = new HashSet<>(this.listObject);
-        this.listObject.clear();
         this.listObject.addAll(setObj);
     }
 
