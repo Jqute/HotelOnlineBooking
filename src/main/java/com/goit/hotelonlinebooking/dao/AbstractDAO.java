@@ -43,7 +43,7 @@ public class AbstractDAO<T extends WithId> {
             System.out.println("Objects list is empty");
         } else if (listObj.containsAll(listObj)) {
             listObject.removeAll(listObj);
-        } else System.out.println("enter the correct list of users you want to delete");
+        } else System.out.println("Enter the correct list of users you want to delete");
     }
 
     public void saveList(List<T> listObj) {

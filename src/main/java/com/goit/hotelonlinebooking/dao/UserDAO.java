@@ -13,7 +13,7 @@ public class UserDAO extends AbstractDAO<User> {
         Iterator<User> iterator = getList().iterator();
         boolean flag = true;
         if (user.getUserPhoneNumber().length() != quantityDigit) {
-            System.out.println("phone number must contain 10 digits: For example 0967543231");
+            System.out.println("Phone number must contain 10 digits: For example 0967543231");
             flag = false;
         } else if (!(user.getEmail().contains("@") && user.getEmail().contains("."))) {
             System.out.println("e-mail must contain \"@\" and \".\"");
@@ -22,13 +22,13 @@ public class UserDAO extends AbstractDAO<User> {
         while (iterator.hasNext()) {
             User u = iterator.next();
             if (u.getId() == user.getId()) {
-                System.out.println("user with ID " + user.getId() + " exists");
+                System.out.println("User with ID " + user.getId() + " exists");
                 flag = false;
             } else if (u.getEmail().equals(user.getEmail())) {
-                System.out.println("user  with email " + user.getEmail() + " exists");
+                System.out.println("User  with email " + user.getEmail() + " exists");
                 flag = false;
             } else if (u.getUserPhoneNumber().equals(user.getUserPhoneNumber())) {
-                System.out.println("user with phone number " + user.getUserPhoneNumber() + " exists");
+                System.out.println("User with phone number " + user.getUserPhoneNumber() + " exists");
                 flag = false;
             }
         }
@@ -41,7 +41,7 @@ public class UserDAO extends AbstractDAO<User> {
                 .collect(Collectors.toList());
         if (userList.size() != 0) return userList;
         else {
-            System.out.println("user with that Name is not found");
+            System.out.println("User with that Name is not found");
             return userList;
         }
     }
@@ -52,7 +52,7 @@ public class UserDAO extends AbstractDAO<User> {
                 .collect(Collectors.toList());
         if (userList.size() != 0) return userList;
         else {
-            System.out.println("user with that LastName is not found");
+            System.out.println("User with that LastName is not found");
             return userList;
         }
     }
@@ -64,7 +64,7 @@ public class UserDAO extends AbstractDAO<User> {
         if (userList.size() != 0) {
             return userList;
         } else {
-            System.out.println("user with that phone Number is not found");
+            System.out.println("User with that phone Number is not found");
             return userList;
         }
     }
