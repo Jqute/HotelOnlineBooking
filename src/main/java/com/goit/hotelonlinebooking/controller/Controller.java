@@ -73,7 +73,7 @@ public class Controller {
                             .collect(Collectors.toList());
                 }
             }
-            if (list == null) System.out.println("Hotel with a name " + nameHotel + " not found");
+            if (list.isEmpty()) System.out.println("Hotel with a name " + nameHotel + " not found");
             return list;
         } else {
             System.out.println("Perform user authentication. Use the method \"login\"");
