@@ -37,20 +37,24 @@ public class HotelDAO extends AbstractDAO<Hotel> {
         if (foundHotels.size() == 0 || foundHotels.size() >= 2) {
             System.out.println("Error. With hotel ID: " + hotelID + " found more that 1 hotel...");
             return null;
-        } else return foundHotels.get(0);
+        } else {
+            return foundHotels.get(0);
+        }
     }
 
-    private List<Room> roomFactory(int numberOfRooms) {     //return Rooms to some Hotel
-        List<Room> DBRoom = generateRooms(false);  ///maybe static???!!!! false - static, true - automatic
+    private List<Room> roomFactory(int numberOfRooms) {
+        List<Room> DBRoom = generateRooms(false);
         List<Room> fillingList = new ArrayList<>();
         if (DBRoom != null) {
             int roomDBSize = DBRoom.size();
             if (numberOfRooms > 0 && numberOfRooms <= roomDBSize) {
-                for (int i = 0; i < numberOfRooms; i++)
+                for (int i = 0; i < numberOfRooms; i++) {
                     fillingList.add(i, DBRoom.get(i));
+                }
             } else if (numberOfRooms > roomDBSize) {
-                for (int i = 0; i < roomDBSize; i++)
+                for (int i = 0; i < roomDBSize; i++) {
                     fillingList.add(i, DBRoom.get(i));
+                }
             }
         } else {
             System.out.println("Sorry, Room's DB unavailable");
@@ -74,7 +78,6 @@ public class HotelDAO extends AbstractDAO<Hotel> {
             roomList.add(new Room(Math.abs(random.nextInt()), 400, 4, 4, null));
             roomList.add(new Room(Math.abs(random.nextInt()), 400, 4, 4, null));
         } else {
-
             Random random = new Random();
             int countOfFloor = 4;
             int maxPrice = 8;
